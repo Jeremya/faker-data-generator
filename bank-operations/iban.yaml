@@ -14,6 +14,17 @@ bindings:
   date_correction: Hash(); ToDate() -> java.util.Date
   amount: Normal(0.0,100.0); Add(1000.0) -> double
   original_operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
+  #station_id: Div(<<sources:10000>>); Mod(<<stations:100>>); ToHashedUUID() -> java.util.UUID
+  #part_layout: Div(<<partsize:1000000>>); ToString() -> String
+  #clust_layout: Mod(<<partsize:1000000>>); ToString() -> String
+  #data: HashedFileExtractToString('data/lorem_ipsum_full.txt',50,150)
+  ## for read
+  #limit: Uniform(1,10) -> int
+  #part_read: Uniform(0,<<partcount:100>>)->int; ToString() -> String
+  #clust_read: Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
+  #part_write: Hash(); Uniform(0,<<partcount:100>>)->int; ToString() -> String
+  #clust_write: Hash(); Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
+  #data_write: Hash(); HashedFileExtractToString('data/lorem_ipsum_full.txt',50,150) -> String
 blocks:
   - tags:
       phase: schema
@@ -35,7 +46,7 @@ blocks:
           date_operation timestamp,
           date_validation timestamp,
           date_correction timestamp,
-          amount float,
+          amount double,
           original_operation_id uuid,
           PRIMARY KEY ((iban), operation_id)
           );
