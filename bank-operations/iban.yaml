@@ -5,27 +5,15 @@ scenarios:
     - run driver=cql tags==phase:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
     - run driver=cql tags==phase:main cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
-  iban: //TODO
-  operation_id: //TODO #Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
-  account_code: //TODO #HashedFileExtractToString('data/lorem_ipsum_full.txt',800,1200)
-  label: //TODO #HashedLineToString('data/variable_words.txt')
-  date_operation: //TODO
-  date_validation: //TODO
-  date_correction: //TODO
-  amount: //TODO
-  original_operation_id: //TODO
-  #sensor_value: Normal(0.0,5.0); Add(100.0) -> double
-  #station_id: Div(<<sources:10000>>); Mod(<<stations:100>>); ToHashedUUID() -> java.util.UUID
-  #part_layout: Div(<<partsize:1000000>>); ToString() -> String
-  #clust_layout: Mod(<<partsize:1000000>>); ToString() -> String
-  #data: HashedFileExtractToString('data/lorem_ipsum_full.txt',50,150)
-  ## for read
-  #limit: Uniform(1,10) -> int
-  #part_read: Uniform(0,<<partcount:100>>)->int; ToString() -> String
-  #clust_read: Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
-  #part_write: Hash(); Uniform(0,<<partcount:100>>)->int; ToString() -> String
-  #clust_write: Hash(); Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
-  #data_write: Hash(); HashedFileExtractToString('data/lorem_ipsum_full.txt',50,150) -> String
+  iban: Hash(); Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
+  operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
+  account_code: HashedLineToString('data/variable_words.txt') #HashedFileExtractToString('data/lorem_ipsum_full.txt',800,1200) ==> return a fragment from adventures.txt between 800 and 1200 characters long"
+  label: HashedLineToString('data/variable_words.txt')
+  date_operation: Hash(); ToDate() -> java.util.Date
+  date_validation: Hash(); ToDate() -> java.util.Date
+  date_correction: Hash(); ToDate() -> java.util.Date
+  amount: Normal(0.0,100.0); Add(1000.0) -> double
+  original_operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
 blocks:
   - tags:
       phase: schema
