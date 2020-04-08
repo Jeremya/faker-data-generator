@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema name="own_00325_hst00.mouvements_validesSolrSchema_v5" version="1.5">
+  <types>
+    <fieldType class="org.apache.solr.schema.TextField" name="TextField">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    <fieldType class="org.apache.solr.schema.TrieLongField" name="TrieLongField"/>
+    <fieldType class="com.datastax.bdp.search.solr.core.types.SimpleDateField" name="SimpleDateField"/>
+    <fieldType class="org.apache.solr.schema.BoolField" name="BoolField"/>
+    <fieldType class="org.apache.solr.schema.TrieIntField" name="TrieIntField"/>
+    <fieldType class="org.apache.solr.schema.StrField" name="StrField"/>
+  </types>
+  <fields>
+    <field docValues="false" indexed="false" multiValued="false" name="C_MCC_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_SGE_EMTTR_TRFRT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_VARIANT_TRF_1_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_FAM_ECO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="C_G_GEST_1_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_SRVEC_ORIG_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="Q_MC" stored="false" type="TrieLongField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="D_CTRCTL_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_DO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_tag_utilisateur" stored="false" type="BoolField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_MOTIF_REJET_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="L_I_DO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_ORDO_RECU_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="D_ANNUL_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_ANNUL_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_SGE_RCPTRT_TRFRT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="Q_VAL_MC" stored="false" type="TrieLongField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_REJET_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_VAL_DONNEE_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="D_VAL_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_IBAN_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="D_TRSRI_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_SURV_URGENT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_AVIS_OPE_ECRIT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_nouveau_code_sous_categorie" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="_I_RIB_INV_SC_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_ancien_code_categorie" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_ALI_RESTI_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_SGE_TENEUR_CPT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="D_OPERT_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_OPERT_INTBQ_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_OPE_RGLMTN_CHNG_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_TYPE_VAL_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_APPLI_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_RIO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_libelle_simplifie" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_UNIQUE_MVT" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="C_CLI_INT" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_FAM_TYPE_CPT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_NTURE_CPT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_EMTTR_PREL_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="L_EXTRT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="L_REF_PRESTN_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_CPT_CLE_ORDO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_REF_REM_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_FF_DEV_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="Q_EXTRT_MC" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="I_UNIQ_CPT" stored="false" type="StrField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_MVT_PREVL_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="M_COMPTABILISE_MC" stored="false" type="TrieLongField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="D_ORIG_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_EMTTR_OPSTN_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="N_SGE_EMTTR_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_TYPE_Q_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="D_VALIDN_MC" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_DEV_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="L_GLOB_PARM_2" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_APPLI_ORIG_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_DEV_ORIG_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="L_PISTE_AUDIT_EIR" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_REF_INTNE" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_PIECE_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="D_OPERT" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_REF_INTNE_DO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_NTURE_INTBQ_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_DECIM_MC" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="_D_INT_MVT" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_MVT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_EXNRN_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="C_SRVCE_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_VARIANT_TRF_2_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="I_RIB_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_SGE_SAIS_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_TYPE_I_DO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_nouveau_code_categorie" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_DONNEE_BLQNT_MC" stored="false" type="TextField"/>
+    <field docValues="true" indexed="true" multiValued="false" name="I_MVT" stored="false" type="StrField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_CD_SGE_SAIS" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_code_pointage" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="pfm_num_carte" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_CNTRT_OPSTN_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="D_RAPPRO" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_VARIANT_SU" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="L_REF_CMRCLE_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="C_RAPPRO" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_CHQ_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="_D_MOD_MVT" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="I_VARIANT_CPT" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="C_G_GEST_2_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_REF_ECRIT_2_MC" stored="false" type="TrieIntField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_SGE_ORDO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_SGE_BUR_ALLGE_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="true" multiValued="false" name="_D_EXP_MVT" stored="false" type="SimpleDateField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_TYPE_SURV_URGENT" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_MOTIF_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_OPE_SDO_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_DEV_CPT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_ORDO_MEME_CLT" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="C_AVIS_OPERT_MC" stored="false" type="TextField"/>
+    <field docValues="false" indexed="false" multiValued="false" name="N_ETABL_ORDO_MC" stored="false" type="TextField"/>
+  </fields>
+  <uniqueKey>(I_UNIQ_CPT,D_OPERT,I_MVT)</uniqueKey>
+</schema>
