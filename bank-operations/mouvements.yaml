@@ -6,6 +6,8 @@ scenarios:
     - run driver=cql tags==phase:main cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
   I_UNIQ_CPT: Hash(); AlphaNumericString(<<key_length:12>>);
+  SEARCH_TEXT: HashedLineToString('data/lorem_ipsum_token.txt'); 
+  DATE_TEXT: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,47304000000L); StringDateWrapper('YYYY-MM-dd');
   D_OPERT: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
   I_MVT: FirstNames();
   C_ALI_RESTI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
@@ -48,14 +50,14 @@ bindings:
   C_TYPE_SURV_URGENT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   C_TYPE_VAL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   C_VAL_DONNEE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  D_ANNUL_MC:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_CTRCTL_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_OPERT_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_ORIG_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_RAPPRO: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_TRSRI_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_VALIDN_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  D_VAL_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_ANNUL_MC:  StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_CTRCTL_MC: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_OPERT_MC: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_ORIG_MC: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_RAPPRO: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_TRSRI_MC: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_VALIDN_MC: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_VAL_MC: StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
   I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   I_IBAN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   I_RIB_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
@@ -94,10 +96,10 @@ bindings:
   Q_EXTRT_MC: Hash(); ToInt() -> int;
   Q_MC: Hash();
   Q_VAL_MC: Hash();
-  _D_EXP_MVT:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  _D_INT_MVT:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  _D_MOD_MVT:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
-  _I_RIB_INV_SC_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  _D_EXP_MVT:  StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  _D_INT_MVT:  StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  _D_MOD_MVT:  StartingEpochMillis('2019-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  _I_RIB_INV_SC_MC: Hash(); AlphaNumericString(<<key_length:12>>);
   pfm_ancien_code_categorie: Hash(); ToInt() -> int;
   pfm_code_pointage: Hash(); ToInt() -> int;
   pfm_libelle_simplifie: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
@@ -300,9 +302,9 @@ blocks:
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
           WHERE solr_query='{"q":"*:*", "fq": [
           "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
-          "D_OPERT:[{D_OPERT} TO NOW]",
-          "_D_INT_MVT:[{_D_INT_MVT} TO NOW]",
-          "C_SRVCE_MC:{C_SRVCE_MC}",
+          "D_OPERT:[{DATE_TEXT} TO NOW]",
+          "_D_INT_MVT:[{DATE_TEXT} TO NOW]",
+          "C_SRVCE_MC:{SEARCH_TEXT}",
           ]';
         tags:
           name: main-select-opert
@@ -310,9 +312,9 @@ blocks:
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
           WHERE solr_query='{"q":"*:*", "fq": [
           "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
-          "D_VALIDN_MC:[{D_VALIDN_MC} TO NOW]",
-          "_D_INT_MVT:[{_D_INT_MVT} TO NOW]",
-          "C_SRVCE_MC:{C_SRVCE_MC}",
+          "D_VALIDN_MC:[{DATE_TEXT} TO NOW]",
+          "_D_INT_MVT:[{DATE_TEXT} TO NOW]",
+          "C_SRVCE_MC:{SEARCH_TEXT}",
           ]';
         tags:
           name: main-select-validn
@@ -326,24 +328,24 @@ blocks:
       - main-select-row: |
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
           WHERE solr_query='{"q":"*:*", "fq": [
-          "C_G_GEST_1_MC:{C_G_GEST_1_MC}",
-          "D_VAL_MC:[{D_VAL_MC} TO NOW]",
+          "C_G_GEST_1_MC:{SEARCH_TEXT}",
+          "D_VAL_MC:[{DATE_TEXT} TO NOW]",
           "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
-          "C_CLI_INT:{C_CLI_INT}",
+          "C_CLI_INT:{SEARCH_TEXT}",
           "I_UNIQ_CPT:{I_UNIQ_CPT}",
-          "M_COMPTABILISE_MC:{M_COMPTABILISE_MC}",
-          "N_SGE_EMTTR_MC:{N_SGE_EMTTR_MC}",
-          "D_VALIDN_MC:[{D_VALIDN_MC} TO NOW]",
-          "D_OPERT:[{D_OPERT} TO NOW]",
-          "_D_INT_MVT:[{_D_INT_MVT} TO NOW]",
-          "C_SRVCE_MC:{C_SRVCE_MC}",
-          "I_RIB_MC:{I_RIB_MC}",
+          "M_COMPTABILISE_MC:{SEARCH_TEXT}",
+          "N_SGE_EMTTR_MC:{SEARCH_TEXT}",
+          "D_VALIDN_MC:[{DATE_TEXT} TO NOW]",
+          "D_OPERT:[{DATE_TEXT} TO NOW]",
+          "_D_INT_MVT:[{DATE_TEXT} TO NOW]",
+          "C_SRVCE_MC:{SEARCH_TEXT}",
+          "I_RIB_MC:{SEARCH_TEXT}",
           "I_MVT:{I_MVT}",
-          "D_RAPPRO:[{D_RAPPRO} TO NOW]",
-          "C_RAPPRO:{C_RAPPRO}",
-          "_D_MOD_MVT:[{_D_MOD_MVT} TO NOW]",
-          "C_G_GEST_2_MC:{C_G_GEST_2_MC}",
-          "_D_EXP_MVT:[{_D_EXP_MVT} TO NOW]" ]';
+          "D_RAPPRO:[{DATE_TEXT} TO NOW]",
+          "C_RAPPRO:{SEARCH_TEXT}",
+          "_D_MOD_MVT:[{DATE_TEXT} TO NOW]",
+          "C_G_GEST_2_MC:{SEARCH_TEXT}",
+          "_D_EXP_MVT:[{DATE_TEXT} TO NOW]" ]';
         tags:
           name: main-select-all
   - tags:
