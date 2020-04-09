@@ -300,11 +300,7 @@ blocks:
     statements:
       - main-select-some: |
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='{"q":"*:*", "fq": [
-          "D_OPERT:[\"2018-01-01T00:00:00Z\" TO NOW]",
-          "_D_INT_MVT:[\"2018-01-01T00:00:00Z\" TO NOW]",
-          "C_SRVCE_MC:Morbi",
-          ]';
+          WHERE solr_query='_D_INT_MVT:["2018-01-01T00:00:00Z" TO NOW] AND I_UNIQ_CPT:A*'
         tags:
           name: main-select-some
   - tags:
