@@ -6,7 +6,7 @@ scenarios:
     - run driver=cql tags==phase:main cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
   I_UNIQ_CPT: Hash(); AlphaNumericString(<<key_length:12>>);
-  D_OPERT: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_OPERT: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
   I_MVT: FirstNames();
   C_ALI_RESTI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   C_ANNUL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
@@ -48,14 +48,14 @@ bindings:
   C_TYPE_SURV_URGENT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   C_TYPE_VAL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   C_VAL_DONNEE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  D_ANNUL_MC:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_CTRCTL_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_OPERT_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_ORIG_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_RAPPRO: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_TRSRI_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_VALIDN_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  D_VAL_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_ANNUL_MC:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_CTRCTL_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_OPERT_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_ORIG_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_RAPPRO: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_TRSRI_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_VALIDN_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  D_VAL_MC: StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
   I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   I_IBAN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   I_RIB_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
@@ -94,9 +94,9 @@ bindings:
   Q_EXTRT_MC: Hash(); ToInt() -> int;
   Q_MC: Hash();
   Q_VAL_MC: Hash();
-  _D_EXP_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  _D_INT_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
-  _D_MOD_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  _D_EXP_MVT:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  _D_INT_MVT:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
+  _D_MOD_MVT:  StartingEpochMillis('2010-01-01 00:00:00');AddHashRange(0,47304000000L); EpochMillisToCqlLocalDate();
   _I_RIB_INV_SC_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
   pfm_ancien_code_categorie: Hash(); ToInt() -> int;
   pfm_code_pointage: Hash(); ToInt() -> int;
@@ -291,52 +291,66 @@ blocks:
           name: insert-rampup
   - tags:
       phase: main
-      type: read
+      type: read-some
     params:
-      ratio: <<read_ratio:1>>
+      ratio: 3
       cl: <<read_cl:LOCAL_QUORUM>>
     statements:
-      - main-select-part: |
+      - main-select-some-opert: |
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE iban={iban}
-          LIMIT <<limit:10>>
+          WHERE solr_query='{"q":"*:*", "fq": [
+          "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
+          "D_OPERT:[{D_OPERT} TO NOW]",
+          "_D_INT_MVT:[{_D_INT_MVT} TO NOW]",
+          "C_SRVCE_MC:{C_SRVCE_MC}",
+          ]';
         tags:
-          name: main-select-part
+          name: main-select-opert
+      - main-select-some-validn: |
+          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='{"q":"*:*", "fq": [
+          "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
+          "D_VALIDN_MC:[{D_VALIDN_MC} TO NOW]",
+          "_D_INT_MVT:[{_D_INT_MVT} TO NOW]",
+          "C_SRVCE_MC:{C_SRVCE_MC}",
+          ]';
+        tags:
+          name: main-select-validn
   - tags:
       phase: main
-      type: read
+      type: read-all
     params:
-      ratio: <<read_ratio:3>>
+      ratio: 1
       cl: <<read_cl:LOCAL_QUORUM>>
     statements:
       - main-select-row: |
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
           WHERE solr_query='{"q":"*:*", "fq": [
           "C_G_GEST_1_MC:{C_G_GEST_1_MC}",
-          "D_VAL_MC:{D_VAL_MC}",
+          "D_VAL_MC:[{D_VAL_MC} TO NOW]",
           "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
           "C_CLI_INT:{C_CLI_INT}",
           "I_UNIQ_CPT:{I_UNIQ_CPT}",
           "M_COMPTABILISE_MC:{M_COMPTABILISE_MC}",
           "N_SGE_EMTTR_MC:{N_SGE_EMTTR_MC}",
-          "D_VALIDN_MC:{D_VALIDN_MC}",
-          "D_OPERT:{D_OPERT}",
-          "_D_INT_MVT:{_D_INT_MVT}",
+          "D_VALIDN_MC:[{D_VALIDN_MC} TO NOW]",
+          "D_OPERT:[{D_OPERT} TO NOW]",
+          "_D_INT_MVT:[{_D_INT_MVT} TO NOW]",
           "C_SRVCE_MC:{C_SRVCE_MC}",
           "I_RIB_MC:{I_RIB_MC}",
           "I_MVT:{I_MVT}",
-          "D_RAPPRO:{D_RAPPRO}",
+          "D_RAPPRO:[{D_RAPPRO} TO NOW]",
           "C_RAPPRO:{C_RAPPRO}",
-          "_D_MOD_MVT:{_D_MOD_MVT}",
+          "_D_MOD_MVT:[{_D_MOD_MVT} TO NOW]",
           "C_G_GEST_2_MC:{C_G_GEST_2_MC}",
-          "_D_EXP_MVT:{_D_EXP_MVT}" ]';
+          "_D_EXP_MVT:[{_D_EXP_MVT} TO NOW]" ]';
         tags:
-          name: main-select-row
+          name: main-select-all
   - tags:
       phase: main
       type: write
     params:
-      ratio: <<write_ratio:9>>
+      ratio: 1
       cl: <<write_cl:LOCAL_QUORUM>>
     statements:
       - insert-main: |
@@ -376,20 +390,20 @@ blocks:
           {N_UNIQUE_MVT}, {Q_EXTRT_MC}, {Q_MC}, {Q_VAL_MC}, {_D_EXP_MVT}, {_D_INT_MVT}, {_D_MOD_MVT},
           {_I_RIB_INV_SC_MC}, {pfm_ancien_code_categorie}, {pfm_code_pointage}, {pfm_libelle_simplifie},
           {pfm_nouveau_code_categorie}, {pfm_nouveau_code_sous_categorie}, {pfm_num_carte}, {pfm_tag_utilisateur})
-          USING TTL <<ttl:86400>>;
+          USING TTL <<ttl_insert:1800>>;
         idempotent: true
         tags:
           name: insert-main
-  - tags:
-      phase: main
-      type: delete
-    params:
-      ratio: <<delete_ratio:1>>
-      cl: <<delete_cl:LOCAL_QUORUM>>
-    statements:
-      - delete-main: |
-          DELETE FROM  <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE "I_UNIQ_CPT"={I_UNIQ_CPT} AND "D_OPERT"={D_OPERT} AND "I_MVT"={I_MVT}
-        idempotent: true
-        tags:
-          name: delete-main
+  # - tags:
+  #     phase: main
+  #     type: delete
+  #   params:
+  #     ratio: <<delete_ratio:1>>
+  #     cl: <<delete_cl:LOCAL_QUORUM>>
+  #   statements:
+  #     - delete-main: |
+  #         DELETE FROM  <<keyspace:bench>>.<<table:mouvements_valides>>
+  #         WHERE "I_UNIQ_CPT"={I_UNIQ_CPT} AND "D_OPERT"={D_OPERT} AND "I_MVT"={I_MVT}
+  #       idempotent: true
+  #       tags:
+  #         name: delete-main
