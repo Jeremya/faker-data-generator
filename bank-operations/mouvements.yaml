@@ -293,7 +293,7 @@ blocks:
       phase: main
       type: read
     params:
-      ratio: 3
+      ratio: 1
       cl: LOCAL_ONE
     statements:
       - main-select-one: |
@@ -325,7 +325,7 @@ blocks:
       phase: main
       type: write
     params:
-      ratio: 3
+      ratio: 1
       cl: <<write_cl:LOCAL_QUORUM>>
     statements:
       - insert-main: |
