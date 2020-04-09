@@ -5,16 +5,12 @@ function log(){
 }
 
 RAMPUP_ROWS=1000000
-READ_ROWS=10000
-WRITE_ROWS=10000
-MIXED_ROWS=10000
 table=""
 mkdir -p log;
 for t in mouvements_valides mouvements_valides_auto_expunge mouvements_valides_sorting; do
 	table=$t;
 	log starting with table $table
-	log "Creating schema"
-	~/nb -v run driver=cql yaml=mouvements tags=phase:schema dsehost=localhost table=$table
-	# table are already created
-	#dsetool reload_core bench.$table solrconfig=solrconfig.xml schema=schema.xml
+	log "Start RAMPING UP with ${RAMPUP_ROWS} rows"
+	~/nb -v run driver=cql yaml=mouvements tags=phase:rampup dsehost=localhost table=$table cycles=$RAMPUP_ROWS | tee -a log/${table}_rampup.log
+	log "End of ramping up"
 done
