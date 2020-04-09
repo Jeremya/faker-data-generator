@@ -36,7 +36,7 @@ bindings:
   C_OPE_RGLMTN_CHNG_MC: HashedLineToString('data/variable_words.txt');
   C_ORDO_MEME_CLT: HashedLineToString('data/variable_words.txt');
   C_ORDO_RECU_MC: HashedLineToString('data/variable_words.txt');
-  C_RAPPRO: //INT
+  C_RAPPRO: Hash(); ToInt() -> int;
   C_REF_INTNE: HashedLineToString('data/variable_words.txt');
   C_REJET_MC: HashedLineToString('data/variable_words.txt');
   C_SGE_SAIS_MC: HashedLineToString('data/variable_words.txt');
@@ -75,13 +75,13 @@ bindings:
   N_CHQ_MC: HashedLineToString('data/variable_words.txt');
   N_CNTRT_OPSTN_MC: HashedLineToString('data/variable_words.txt');
   N_CPT_CLE_ORDO_MC: HashedLineToString('data/variable_words.txt');
-  N_DECIM_MC: //INT
+  N_DECIM_MC: Hash(); ToInt() -> int;
   N_EMTTR_OPSTN_MC: HashedLineToString('data/variable_words.txt');
   N_ETABL_ORDO_MC: HashedLineToString('data/variable_words.txt');
   N_FAM_TYPE_CPT_MC: HashedLineToString('data/variable_words.txt');
   N_OPE_SDO_MC: HashedLineToString('data/variable_words.txt');
   N_PIECE_MC: HashedLineToString('data/variable_words.txt');
-  N_REF_ECRIT_2_MC: //INT
+  N_REF_ECRIT_2_MC: Hash(); ToInt() -> int;
   N_REF_INTNE_DO_MC: HashedLineToString('data/variable_words.txt');
   N_REF_REM_MC: HashedLineToString('data/variable_words.txt');
   N_SGE_BUR_ALLGE_MC: HashedLineToString('data/variable_words.txt');
@@ -91,20 +91,20 @@ bindings:
   N_SGE_RCPTRT_TRFRT_MC: HashedLineToString('data/variable_words.txt');
   N_SGE_TENEUR_CPT_MC: HashedLineToString('data/variable_words.txt');
   N_UNIQUE_MVT: HashedLineToString('data/variable_words.txt');
-  Q_EXTRT_MC: //INT
+  Q_EXTRT_MC: Hash(); ToInt() -> int;
   Q_MC: Hash();
   Q_VAL_MC: Hash();
   _D_EXP_MVT:  Hash(); ToDate() -> java.util.Date
   _D_INT_MVT:  Hash(); ToDate() -> java.util.Date
   _D_MOD_MVT:  Hash(); ToDate() -> java.util.Date
   _I_RIB_INV_SC_MC: HashedLineToString('data/variable_words.txt');
-  pfm_ancien_code_categorie: //INT
-  pfm_code_pointage: //INT
+  pfm_ancien_code_categorie: Hash(); ToInt() -> int;
+  pfm_code_pointage: Hash(); ToInt() -> int;
   pfm_libelle_simplifie: HashedLineToString('data/variable_words.txt');
-  pfm_nouveau_code_categorie: //INT
-  pfm_nouveau_code_sous_categorie: //INT
+  pfm_nouveau_code_categorie: Hash(); ToInt() -> int;
+  pfm_nouveau_code_sous_categorie: Hash(); ToInt() -> int;
   pfm_num_carte: HashedLineToString('data/variable_words.txt');
-  pfm_tag_utilisateur: //BOOLEAN
+  pfm_tag_utilisateur: Hash(); ModuloToBoolean() -> Boolean;
   # iban: Hash(); Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
   # operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
   # account_code: HashedLineToString('data/variable_words.txt'); #HashedFileExtractToString('data/lorem_ipsum_full.txt',800,1200) ==> return a fragment from adventures.txt between 800 and 1200 characters long"
