@@ -296,58 +296,17 @@ blocks:
       type: read-some
     params:
       ratio: 3
-      cl: <<read_cl:LOCAL_QUORUM>>
+      cl: LOCAL_ONE 
     statements:
-      - main-select-some-opert: |
+      - main-select-some: |
           SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
           WHERE solr_query='{"q":"*:*", "fq": [
-          "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
-          "D_OPERT:[{DATE_TEXT} TO NOW]",
-          "_D_INT_MVT:[{DATE_TEXT} TO NOW]",
-          "C_SRVCE_MC:{SEARCH_TEXT}",
+          "D_OPERT:[\"2018-01-01T00:00:00Z\" TO NOW]",
+          "_D_INT_MVT:[\"2018-01-01T00:00:00Z\" TO NOW]",
+          "C_SRVCE_MC:Morbi",
           ]';
         tags:
-          name: main-select-opert
-      - main-select-some-validn: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='{"q":"*:*", "fq": [
-          "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
-          "D_VALIDN_MC:[{DATE_TEXT} TO NOW]",
-          "_D_INT_MVT:[{DATE_TEXT} TO NOW]",
-          "C_SRVCE_MC:{SEARCH_TEXT}",
-          ]';
-        tags:
-          name: main-select-validn
-  - tags:
-      phase: main
-      type: read-all
-    params:
-      ratio: 1
-      cl: <<read_cl:LOCAL_QUORUM>>
-    statements:
-      - main-select-row: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='{"q":"*:*", "fq": [
-          "C_G_GEST_1_MC:{SEARCH_TEXT}",
-          "D_VAL_MC:[{DATE_TEXT} TO NOW]",
-          "_I_RIB_INV_SC_MC:{_I_RIB_INV_SC_MC}",
-          "C_CLI_INT:{SEARCH_TEXT}",
-          "I_UNIQ_CPT:{I_UNIQ_CPT}",
-          "M_COMPTABILISE_MC:{SEARCH_TEXT}",
-          "N_SGE_EMTTR_MC:{SEARCH_TEXT}",
-          "D_VALIDN_MC:[{DATE_TEXT} TO NOW]",
-          "D_OPERT:[{DATE_TEXT} TO NOW]",
-          "_D_INT_MVT:[{DATE_TEXT} TO NOW]",
-          "C_SRVCE_MC:{SEARCH_TEXT}",
-          "I_RIB_MC:{SEARCH_TEXT}",
-          "I_MVT:{I_MVT}",
-          "D_RAPPRO:[{DATE_TEXT} TO NOW]",
-          "C_RAPPRO:{SEARCH_TEXT}",
-          "_D_MOD_MVT:[{DATE_TEXT} TO NOW]",
-          "C_G_GEST_2_MC:{SEARCH_TEXT}",
-          "_D_EXP_MVT:[{DATE_TEXT} TO NOW]" ]';
-        tags:
-          name: main-select-all
+          name: main-select-some
   - tags:
       phase: main
       type: write
