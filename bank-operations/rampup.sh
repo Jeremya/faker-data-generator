@@ -12,5 +12,5 @@ for t in mouvements_valides mouvements_valides_auto_expunge mouvements_valides_s
 	log starting with table $table
 	log "Start RAMPING UP with ${RAMPUP_ROWS} rows"
 	~/nb -v run driver=cql yaml=mouvements tags=phase:rampup dsehost=localhost table=$table cycles=$RAMPUP_ROWS | tee -a log/${table}_rampup.log
-	log "End of ramping up"
+	log "End of ramping up for table $table"
 done
