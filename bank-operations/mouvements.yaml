@@ -6,7 +6,7 @@ scenarios:
     - run driver=cql tags==phase:main cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
   I_UNIQ_CPT: Hash(); ToString() -> String
-  D_OPERT: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
+  D_OPERT: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
   I_MVT: HashedLineToString('data/variable_words.txt');
   C_ALI_RESTI_MC: HashedLineToString('data/variable_words.txt');
   C_ANNUL_MC: HashedLineToString('data/variable_words.txt');
@@ -48,14 +48,14 @@ bindings:
   C_TYPE_SURV_URGENT: HashedLineToString('data/variable_words.txt');
   C_TYPE_VAL_MC: HashedLineToString('data/variable_words.txt');
   C_VAL_DONNEE_MC: HashedLineToString('data/variable_words.txt');
-  D_ANNUL_MC:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_CTRCTL_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_OPERT_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_ORIG_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_RAPPRO: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_TRSRI_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_VALIDN_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  D_VAL_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
+  D_ANNUL_MC:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_CTRCTL_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_OPERT_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_ORIG_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_RAPPRO: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_TRSRI_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_VALIDN_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  D_VAL_MC: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
   I_DO_MC: HashedLineToString('data/variable_words.txt');
   I_IBAN_MC: HashedLineToString('data/variable_words.txt');
   I_RIB_MC: HashedLineToString('data/variable_words.txt');
@@ -94,9 +94,9 @@ bindings:
   Q_EXTRT_MC: Hash(); ToInt() -> int;
   Q_MC: Hash();
   Q_VAL_MC: Hash();
-  _D_EXP_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  _D_INT_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  _D_MOD_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
+  _D_EXP_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  _D_INT_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  _D_MOD_MVT:  StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
   _I_RIB_INV_SC_MC: HashedLineToString('data/variable_words.txt');
   pfm_ancien_code_categorie: Hash(); ToInt() -> int;
   pfm_code_pointage: Hash(); ToInt() -> int;
@@ -109,9 +109,9 @@ bindings:
   # operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
   # account_code: HashedLineToString('data/variable_words.txt'); #HashedFileExtractToString('data/lorem_ipsum_full.txt',800,1200) ==> return a fragment from adventures.txt between 800 and 1200 characters long"
   # label: HashedLineToString('data/variable_words.txt');
-  # date_operation: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  # date_validation: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
-  # date_correction: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000); EpochMillisToCqlLocalDate();
+  # date_operation: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  # date_validation: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
+  # date_correction: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,432000000000L); EpochMillisToCqlLocalDate();
   # amount: Normal(0.0,100.0); Add(1000.0) -> double
   # original_operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
   #station_id: Div(<<sources:10000>>); Mod(<<stations:100>>); ToHashedUUID() -> java.util.UUID
