@@ -5,49 +5,49 @@ scenarios:
     - run driver=cql tags==phase:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
     - run driver=cql tags==phase:main cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
-  I_UNIQ_CPT:
+  I_UNIQ_CPT: Hash(); ToString() -> String
   D_OPERT: Hash(); ToDate() -> java.util.Date
-  I_MVT:
-  C_ALI_RESTI_MC:
-  C_ANNUL_MC:
-  C_APPLI_ORIG_MC:
-  C_AVIS_OPERT_MC:
-  C_AVIS_OPE_ECRIT_MC:
-  C_CD_SGE_SAIS:
-  C_CLI_INT:
-  C_DEV_CPT_MC:
-  C_DEV_MC:
-  C_DEV_ORIG_MC:
-  C_DONNEE_BLQNT_MC:
-  C_EMTTR_PREL_MC:
-  C_EXNRN_MC:
-  C_FAM_ECO_MC:
-  C_FF_DEV_MC:
-  C_G_GEST_1_MC:
-  C_G_GEST_2_MC:
-  C_MCC_MC:
-  C_MOTIF_MC:
-  C_MOTIF_REJET_MC:
-  C_MVT_MC:
-  C_MVT_PREVL_MC:
-  C_NTURE_CPT_MC:
-  C_NTURE_INTBQ_MC:
-  C_OPERT_INTBQ_MC:
-  C_OPE_RGLMTN_CHNG_MC:
-  C_ORDO_MEME_CLT:
-  C_ORDO_RECU_MC:
-  C_RAPPRO:
-  C_REF_INTNE:
-  C_REJET_MC:
-  C_SGE_SAIS_MC:
-  C_SRVCE_MC:
-  C_SRVEC_ORIG_MC:
-  C_SURV_URGENT_MC:
-  C_TYPE_I_DO_MC:
-  C_TYPE_Q_MC:
-  C_TYPE_SURV_URGENT:
-  C_TYPE_VAL_MC:
-  C_VAL_DONNEE_MC:
+  I_MVT: HashedLineToString('data/variable_words.txt');
+  C_ALI_RESTI_MC: HashedLineToString('data/variable_words.txt');
+  C_ANNUL_MC: HashedLineToString('data/variable_words.txt');
+  C_APPLI_ORIG_MC: HashedLineToString('data/variable_words.txt');
+  C_AVIS_OPERT_MC: HashedLineToString('data/variable_words.txt');
+  C_AVIS_OPE_ECRIT_MC: HashedLineToString('data/variable_words.txt');
+  C_CD_SGE_SAIS: HashedLineToString('data/variable_words.txt');
+  C_CLI_INT: HashedLineToString('data/variable_words.txt');
+  C_DEV_CPT_MC: HashedLineToString('data/variable_words.txt');
+  C_DEV_MC: HashedLineToString('data/variable_words.txt');
+  C_DEV_ORIG_MC: HashedLineToString('data/variable_words.txt');
+  C_DONNEE_BLQNT_MC: HashedLineToString('data/variable_words.txt');
+  C_EMTTR_PREL_MC: HashedLineToString('data/variable_words.txt');
+  C_EXNRN_MC: HashedLineToString('data/variable_words.txt');
+  C_FAM_ECO_MC: HashedLineToString('data/variable_words.txt');
+  C_FF_DEV_MC: HashedLineToString('data/variable_words.txt');
+  C_G_GEST_1_MC: HashedLineToString('data/variable_words.txt');
+  C_G_GEST_2_MC: HashedLineToString('data/variable_words.txt');
+  C_MCC_MC: HashedLineToString('data/variable_words.txt');
+  C_MOTIF_MC: HashedLineToString('data/variable_words.txt');
+  C_MOTIF_REJET_MC: HashedLineToString('data/variable_words.txt');
+  C_MVT_MC: HashedLineToString('data/variable_words.txt');
+  C_MVT_PREVL_MC: HashedLineToString('data/variable_words.txt');
+  C_NTURE_CPT_MC: HashedLineToString('data/variable_words.txt');
+  C_NTURE_INTBQ_MC: HashedLineToString('data/variable_words.txt');
+  C_OPERT_INTBQ_MC: HashedLineToString('data/variable_words.txt');
+  C_OPE_RGLMTN_CHNG_MC: HashedLineToString('data/variable_words.txt');
+  C_ORDO_MEME_CLT: HashedLineToString('data/variable_words.txt');
+  C_ORDO_RECU_MC: HashedLineToString('data/variable_words.txt');
+  C_RAPPRO: //INT
+  C_REF_INTNE: HashedLineToString('data/variable_words.txt');
+  C_REJET_MC: HashedLineToString('data/variable_words.txt');
+  C_SGE_SAIS_MC: HashedLineToString('data/variable_words.txt');
+  C_SRVCE_MC: HashedLineToString('data/variable_words.txt');
+  C_SRVEC_ORIG_MC: HashedLineToString('data/variable_words.txt');
+  C_SURV_URGENT_MC: HashedLineToString('data/variable_words.txt');
+  C_TYPE_I_DO_MC: HashedLineToString('data/variable_words.txt');
+  C_TYPE_Q_MC: HashedLineToString('data/variable_words.txt');
+  C_TYPE_SURV_URGENT: HashedLineToString('data/variable_words.txt');
+  C_TYPE_VAL_MC: HashedLineToString('data/variable_words.txt');
+  C_VAL_DONNEE_MC: HashedLineToString('data/variable_words.txt');
   D_ANNUL_MC:  Hash(); ToDate() -> java.util.Date
   D_CTRCTL_MC: Hash(); ToDate() -> java.util.Date
   D_OPERT_MC: Hash(); ToDate() -> java.util.Date
@@ -56,59 +56,59 @@ bindings:
   D_TRSRI_MC: Hash(); ToDate() -> java.util.Date
   D_VALIDN_MC: Hash(); ToDate() -> java.util.Date
   D_VAL_MC: Hash(); ToDate() -> java.util.Date
-  I_DO_MC:
-  I_IBAN_MC:
-  I_RIB_MC:
-  I_RIO_MC:
-  I_VARIANT_CPT:
-  I_VARIANT_SU:
-  I_VARIANT_TRF_1_MC:
-  I_VARIANT_TRF_2_MC:
-  L_EXTRT_MC:
-  L_GLOB_PARM_2:
-  L_I_DO_MC:
-  L_PISTE_AUDIT_EIR:
-  L_REF_CMRCLE_MC:
-  L_REF_PRESTN_MC:
-  M_COMPTABILISE_MC:
-  N_APPLI_MC:
-  N_CHQ_MC:
-  N_CNTRT_OPSTN_MC:
-  N_CPT_CLE_ORDO_MC:
-  N_DECIM_MC:
-  N_EMTTR_OPSTN_MC:
-  N_ETABL_ORDO_MC:
-  N_FAM_TYPE_CPT_MC:
-  N_OPE_SDO_MC:
-  N_PIECE_MC:
-  N_REF_ECRIT_2_MC:
-  N_REF_INTNE_DO_MC:
-  N_REF_REM_MC:
-  N_SGE_BUR_ALLGE_MC:
-  N_SGE_EMTTR_MC:
-  N_SGE_EMTTR_TRFRT_MC:
-  N_SGE_ORDO_MC:
-  N_SGE_RCPTRT_TRFRT_MC:
-  N_SGE_TENEUR_CPT_MC:
-  N_UNIQUE_MVT:
-  Q_EXTRT_MC:
-  Q_MC:
-  Q_VAL_MC:
+  I_DO_MC: HashedLineToString('data/variable_words.txt');
+  I_IBAN_MC: HashedLineToString('data/variable_words.txt');
+  I_RIB_MC: HashedLineToString('data/variable_words.txt');
+  I_RIO_MC: HashedLineToString('data/variable_words.txt');
+  I_VARIANT_CPT: HashedLineToString('data/variable_words.txt');
+  I_VARIANT_SU: HashedLineToString('data/variable_words.txt');
+  I_VARIANT_TRF_1_MC: HashedLineToString('data/variable_words.txt');
+  I_VARIANT_TRF_2_MC: HashedLineToString('data/variable_words.txt');
+  L_EXTRT_MC: HashedLineToString('data/variable_words.txt');
+  L_GLOB_PARM_2: HashedLineToString('data/variable_words.txt');
+  L_I_DO_MC: HashedLineToString('data/variable_words.txt');
+  L_PISTE_AUDIT_EIR: HashedLineToString('data/variable_words.txt');
+  L_REF_CMRCLE_MC: HashedLineToString('data/variable_words.txt');
+  L_REF_PRESTN_MC: HashedLineToString('data/variable_words.txt');
+  M_COMPTABILISE_MC: Hash();
+  N_APPLI_MC: HashedLineToString('data/variable_words.txt');
+  N_CHQ_MC: HashedLineToString('data/variable_words.txt');
+  N_CNTRT_OPSTN_MC: HashedLineToString('data/variable_words.txt');
+  N_CPT_CLE_ORDO_MC: HashedLineToString('data/variable_words.txt');
+  N_DECIM_MC: //INT
+  N_EMTTR_OPSTN_MC: HashedLineToString('data/variable_words.txt');
+  N_ETABL_ORDO_MC: HashedLineToString('data/variable_words.txt');
+  N_FAM_TYPE_CPT_MC: HashedLineToString('data/variable_words.txt');
+  N_OPE_SDO_MC: HashedLineToString('data/variable_words.txt');
+  N_PIECE_MC: HashedLineToString('data/variable_words.txt');
+  N_REF_ECRIT_2_MC: //INT
+  N_REF_INTNE_DO_MC: HashedLineToString('data/variable_words.txt');
+  N_REF_REM_MC: HashedLineToString('data/variable_words.txt');
+  N_SGE_BUR_ALLGE_MC: HashedLineToString('data/variable_words.txt');
+  N_SGE_EMTTR_MC: HashedLineToString('data/variable_words.txt');
+  N_SGE_EMTTR_TRFRT_MC: HashedLineToString('data/variable_words.txt');
+  N_SGE_ORDO_MC: HashedLineToString('data/variable_words.txt');
+  N_SGE_RCPTRT_TRFRT_MC: HashedLineToString('data/variable_words.txt');
+  N_SGE_TENEUR_CPT_MC: HashedLineToString('data/variable_words.txt');
+  N_UNIQUE_MVT: HashedLineToString('data/variable_words.txt');
+  Q_EXTRT_MC: //INT
+  Q_MC: Hash();
+  Q_VAL_MC: Hash();
   _D_EXP_MVT:  Hash(); ToDate() -> java.util.Date
   _D_INT_MVT:  Hash(); ToDate() -> java.util.Date
   _D_MOD_MVT:  Hash(); ToDate() -> java.util.Date
-  _I_RIB_INV_SC_MC:
-  pfm_ancien_code_categorie:
-  pfm_code_pointage:
-  pfm_libelle_simplifie:
-  pfm_nouveau_code_categorie:
-  pfm_nouveau_code_sous_categorie:
-  pfm_num_carte:
-  pfm_tag_utilisateur:
+  _I_RIB_INV_SC_MC: HashedLineToString('data/variable_words.txt');
+  pfm_ancien_code_categorie: //INT
+  pfm_code_pointage: //INT
+  pfm_libelle_simplifie: HashedLineToString('data/variable_words.txt');
+  pfm_nouveau_code_categorie: //INT
+  pfm_nouveau_code_sous_categorie: //INT
+  pfm_num_carte: HashedLineToString('data/variable_words.txt');
+  pfm_tag_utilisateur: //BOOLEAN
   # iban: Hash(); Add(1); Uniform(0,<<partsize:1000000>>)->int; ToString() -> String
   # operation_id: Mod(<<sources:10000>>); ToHashedUUID() -> java.util.UUID
-  # account_code: HashedLineToString('data/variable_words.txt') #HashedFileExtractToString('data/lorem_ipsum_full.txt',800,1200) ==> return a fragment from adventures.txt between 800 and 1200 characters long"
-  # label: HashedLineToString('data/variable_words.txt')
+  # account_code: HashedLineToString('data/variable_words.txt'); #HashedFileExtractToString('data/lorem_ipsum_full.txt',800,1200) ==> return a fragment from adventures.txt between 800 and 1200 characters long"
+  # label: HashedLineToString('data/variable_words.txt');
   # date_operation: Hash(); ToDate() -> java.util.Date
   # date_validation: Hash(); ToDate() -> java.util.Date
   # date_correction: Hash(); ToDate() -> java.util.Date
