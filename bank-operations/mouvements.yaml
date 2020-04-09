@@ -3,7 +3,7 @@ scenarios:
   default:
     - run driver=cql tags==phase:schema threads==1 cycles==UNDEF
     - run driver=cql tags==phase:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
-    - run driver=cql tags==phase:main cycles===TEMPLATE(main-cycles,10000000) threads=auto
+    - run driver=cql tags==phase:read cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
   I_UNIQ_CPT: Hash(); AlphaNumericString(<<key_length:12>>);
   SEARCH_TEXT: HashedLineToString('data/lorem_ipsum_token.txt');
@@ -293,7 +293,7 @@ blocks:
           name: insert-rampup
   - tags:
       phase: main
-      type: read-some
+      type: read
     params:
       ratio: 3
       cl: LOCAL_ONE
@@ -327,7 +327,7 @@ blocks:
       phase: main
       type: write
     params:
-      ratio: 1
+      ratio: 3
       cl: <<write_cl:LOCAL_QUORUM>>
     statements:
       - insert-main: |
