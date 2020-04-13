@@ -1,4 +1,4 @@
-# nb -v run driver=cql yaml=cql-mouvements_valides tags=phase:schema host=dsehost
+# nb -v run driver=stdout/cql yaml=solr tags=phase:schema host=localhost
 scenarios:
   default:
     - run driver=cql tags==phase:schema threads==1 cycles==UNDEF
@@ -53,6 +53,7 @@ blocks:
       ratio: 1
       cl: LOCAL_ONE
       prepared: false
+      raw: true
     # One of these per ratio
     # A minimal pattern will be computed by taking each row of statements and multiply per ratio.
     # With n statements and ratio r it will produce a r*n-statements pattern. nb will (int) divide
