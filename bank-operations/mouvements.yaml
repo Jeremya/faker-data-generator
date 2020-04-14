@@ -6,104 +6,105 @@ scenarios:
     - run driver=cql tags==phase:read cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
   I_UNIQ_CPT: Hash(); Mod(25000); AlphaNumericString(<<key_length:12>>);
-  D_OPERT: StartingEpochMillis('2020-01-01 00:00:00'); AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  I_MVT: HashedLineToString('data/mouvements.txt');
-  C_ALI_RESTI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_ANNUL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_APPLI_ORIG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_AVIS_OPERT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_AVIS_OPE_ECRIT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_CD_SGE_SAIS: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_CLI_INT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_DEV_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_DEV_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_DEV_ORIG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_DONNEE_BLQNT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_EMTTR_PREL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_EXNRN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_FAM_ECO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_FF_DEV_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_G_GEST_1_MC: HashedLineToString('data/lorem_ipsum_token.txt')
-  C_G_GEST_2_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_MCC_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_MOTIF_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_MOTIF_REJET_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_MVT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_MVT_PREVL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_NTURE_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_NTURE_INTBQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_OPERT_INTBQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_OPE_RGLMTN_CHNG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_ORDO_MEME_CLT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_ORDO_RECU_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  D_OPERT: StartingEpochMillis('2020-01-01 00:00:00'); AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  I_MVT: Hash(); HashedLineToString('data/mouvements.txt');
+  TOKEN: Hash(); HashedLineToString('data/lorem_ipsum_token.txt');
+  C_ALI_RESTI_MC: Hash(); Add(1); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_ANNUL_MC: Hash(); Add(2) ; HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_APPLI_ORIG_MC: Hash(); Add(3); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_AVIS_OPERT_MC: Hash(); Add(4); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_AVIS_OPE_ECRIT_MC: Hash(); Add(5); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_CD_SGE_SAIS: Hash(); Add(6); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_CLI_INT: Hash(); Add(7); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_DEV_CPT_MC: Hash(); Add(8); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_DEV_MC: Hash(); Add(9); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_DEV_ORIG_MC: Hash(); Add(10); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_DONNEE_BLQNT_MC: Hash(); Add(11); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_EMTTR_PREL_MC: Hash(); Add(12); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_EXNRN_MC: Hash(); Add(13); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_FAM_ECO_MC: Hash(); Add(14); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_FF_DEV_MC: Hash(); Add(15); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_G_GEST_1_MC: Hash(); Add(16); HashedLineToString('data/lorem_ipsum_token.txt')
+  C_G_GEST_2_MC: Hash(); Add(17); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_MCC_MC: Hash(); Add(18); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_MOTIF_MC: Hash(); Add(19); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_MOTIF_REJET_MC: Hash(); Add(20); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_MVT_MC: Hash(); Add(21); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_MVT_PREVL_MC: Hash(); Add(22); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_NTURE_CPT_MC: Hash(); Add(23); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_NTURE_INTBQ_MC: Hash(); Add(24); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_OPERT_INTBQ_MC: Hash(); Add(25); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_OPE_RGLMTN_CHNG_MC: Hash(); Add(26); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_ORDO_MEME_CLT: Hash(); Add(27); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_ORDO_RECU_MC: Hash(); Add(28); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
   C_RAPPRO: Hash(); ToInt() -> int;
-  C_REF_INTNE: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_REJET_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_SGE_SAIS_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_SRVCE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_SRVEC_ORIG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_SURV_URGENT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_TYPE_I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_TYPE_Q_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_TYPE_SURV_URGENT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_TYPE_VAL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  C_VAL_DONNEE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  D_ANNUL_MC:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_CTRCTL_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_OPERT_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_ORIG_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_RAPPRO: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_TRSRI_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_VALIDN_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  D_VAL_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_IBAN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_RIB_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_RIO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_VARIANT_CPT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_VARIANT_SU: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_VARIANT_TRF_1_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  I_VARIANT_TRF_2_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  L_EXTRT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  L_GLOB_PARM_2: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  L_I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  L_PISTE_AUDIT_EIR: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  L_REF_CMRCLE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  L_REF_PRESTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_REF_INTNE: Hash(); Add(29); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_REJET_MC: Hash(); Add(30); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_SGE_SAIS_MC: Hash(); Add(31); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_SRVCE_MC: Hash(); Add(32); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_SRVEC_ORIG_MC: Hash(); Add(33); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_SURV_URGENT_MC: Hash(); Add(34); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_TYPE_I_DO_MC: Hash(); Add(35); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_TYPE_Q_MC: Hash(); Add(36); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_TYPE_SURV_URGENT: Hash(); Add(37); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_TYPE_VAL_MC: Hash(); Add(38); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  C_VAL_DONNEE_MC: Hash(); Add(39); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  D_ANNUL_MC:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_CTRCTL_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_OPERT_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_ORIG_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_RAPPRO: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_TRSRI_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_VALIDN_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  D_VAL_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  I_DO_MC: Hash(); Add(40); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_IBAN_MC: Hash(); Add(41); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_RIB_MC: Hash(); Add(42); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_RIO_MC: Hash(); Add(43); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_VARIANT_CPT: Hash(); Add(44); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_VARIANT_SU: Hash(); Add(45); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_VARIANT_TRF_1_MC: Hash(); Add(46); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  I_VARIANT_TRF_2_MC: Hash(); Add(47); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  L_EXTRT_MC: Hash(); Add(48); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  L_GLOB_PARM_2: Hash(); Add(49); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  L_I_DO_MC: Hash(); Add(50); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  L_PISTE_AUDIT_EIR: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  L_REF_CMRCLE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  L_REF_PRESTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
   M_COMPTABILISE_MC: Hash();
-  N_APPLI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_CHQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_CNTRT_OPSTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_CPT_CLE_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_DECIM_MC: Hash(); ToInt() -> int;
-  N_EMTTR_OPSTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_ETABL_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_FAM_TYPE_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_OPE_SDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_PIECE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_REF_ECRIT_2_MC: Hash(); ToInt() -> int;
-  N_REF_INTNE_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_REF_REM_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_SGE_BUR_ALLGE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_SGE_EMTTR_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_SGE_EMTTR_TRFRT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_SGE_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_SGE_RCPTRT_TRFRT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_SGE_TENEUR_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  N_UNIQUE_MVT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  Q_EXTRT_MC: Hash(); ToInt() -> int;
-  Q_MC: Hash();
-  Q_VAL_MC: Hash();
-  _D_EXP_MVT:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  _D_INT_MVT:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
-  _D_MOD_MVT:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  N_APPLI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_CHQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_CNTRT_OPSTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_CPT_CLE_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_DECIM_MC: Hash(); Add(2); ToInt() -> int;
+  N_EMTTR_OPSTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_ETABL_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_FAM_TYPE_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_OPE_SDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_PIECE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_REF_ECRIT_2_MC: Hash(); Add(3); ToInt() -> int;
+  N_REF_INTNE_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_REF_REM_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_SGE_BUR_ALLGE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_SGE_EMTTR_MC: Hash(); Add(55); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_SGE_EMTTR_TRFRT_MC: Hash(); Add(56); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_SGE_ORDO_MC: Hash(); Add(57); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_SGE_RCPTRT_TRFRT_MC: Hash(); Add(58); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_SGE_TENEUR_CPT_MC: Hash(); Add(59); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  N_UNIQUE_MVT: Hash(); Add(60); HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  Q_EXTRT_MC: Hash(); Add(60); ToInt() -> int;
+  Q_MC: Hash(); Add(1000);
+  Q_VAL_MC: Hash(); Add(1001);
+  _D_EXP_MVT:  StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,3600000000L); EpochMillisToCqlLocalDate();
+  _D_INT_MVT:  StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,1800000000L); AddHashRange(0,1800000000L); EpochMillisToCqlLocalDate();
+  _D_MOD_MVT:  StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,1200000000L); AddHashRange(0,1200000000L); AddHashRange(0,12000000000L); EpochMillisToCqlLocalDate();
   _I_RIB_INV_SC_MC: Hash(); AlphaNumericString(<<key_length:12>>);
-  pfm_ancien_code_categorie: Hash(); ToInt() -> int;
-  pfm_code_pointage: Hash(); ToInt() -> int;
-  pfm_libelle_simplifie: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
-  pfm_nouveau_code_categorie: Hash(); ToInt() -> int;
-  pfm_nouveau_code_sous_categorie: Hash(); ToInt() -> int;
-  pfm_num_carte: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  pfm_ancien_code_categorie: Hash(); Add(1003) ToInt() -> int;
+  pfm_code_pointage: Hash(); Add(1004); ToInt() -> int;
+  pfm_libelle_simplifie: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
+  pfm_nouveau_code_categorie: Hash(); Add(1005); ToInt() -> int;
+  pfm_nouveau_code_sous_categorie: Hash(); Add(1006); ToInt() -> int;
+  pfm_num_carte: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
   pfm_tag_utilisateur: Hash(); ModuloToBoolean();
 blocks:
   - tags:
@@ -295,32 +296,29 @@ blocks:
     params:
       ratio: 1
       cl: LOCAL_ONE
+      prepared: false
+      raw: true
     statements:
       - main-select-one: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:"2020-01-01T00:00:00Z" AND I_UNIQ_CPT:A*'
+          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:{D_OPERT} AND I_UNIQ_CPT:{I_UNIQ_CPT}';
         tags:
           name: main-select-one
       - main-select-two: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:"2020-01-08T00:00:00Z" AND C_G_GEST_1_MC:B*'
+          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:{D_OPERT} AND C_G_GEST_1_MC:{TOKEN}';
         tags:
           name: main-select-two
       - main-select-three: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:"2020-01-03T00:00:00Z" AND I_UNIQ_CPT:Z*'
+          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_VALIDN_MC:{D_VALIDN_MC} AND _I_RIB_INV_SC_MC:{TOKEN}';
         tags:
           name: main-select-three
       - main-select-four: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:"2020-01-07T00:00:00Z" AND C_G_GEST_1_MC:D*'
+          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:{D_OPERT} AND D_VALIDN_MC:{D_VALIDN_MC} AND C_G_GEST_1_MC:{TOKEN}';
         tags:
           name: main-select-four
-      - main-select-five: |
-          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:"2020-01-03T00:00:00Z" AND I_UNIQ_CPT:B*'
-        tags:
-          name: main-select-five
   - tags:
       phase: main
       type: write
