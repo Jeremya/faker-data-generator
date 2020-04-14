@@ -99,7 +99,7 @@ bindings:
   _D_INT_MVT:  StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,1800000000L); AddHashRange(0,1800000000L); EpochMillisToCqlLocalDate();
   _D_MOD_MVT:  StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,1200000000L); AddHashRange(0,1200000000L); AddHashRange(0,12000000000L); EpochMillisToCqlLocalDate();
   _I_RIB_INV_SC_MC: Hash(); AlphaNumericString(<<key_length:12>>);
-  pfm_ancien_code_categorie: Hash(); Add(1003) ToInt() -> int;
+  pfm_ancien_code_categorie: Hash(); Add(1003); ToInt() -> int;
   pfm_code_pointage: Hash(); Add(1004); ToInt() -> int;
   pfm_libelle_simplifie: HashedFileExtractToString('data/lorem_ipsum_full.txt',8,20)
   pfm_nouveau_code_categorie: Hash(); Add(1005); ToInt() -> int;
