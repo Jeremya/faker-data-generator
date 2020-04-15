@@ -5,7 +5,7 @@ scenarios:
     - run driver=cql tags==phase:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
     - run driver=cql tags==phase:read cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
-  I_UNIQ_CPT: Hash(); Mod(25000); AlphaNumericString(<<key_length:12>>);
+  I_UNIQ_CPT: Hash(); Mod(250000); AlphaNumericString(<<key_length:12>>);
   D_OPERT: StartingEpochMillis('2020-01-01 00:00:00'); AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
   I_MVT: Hash(); HashedLineToString('data/mouvements.txt');
   TOKEN: Hash(); HashedLineToString('data/lorem_ipsum_token.txt');
