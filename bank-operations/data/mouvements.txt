@@ -1,4 +1,6 @@
 input
-output
 both
+output
 directed
+please
+into
