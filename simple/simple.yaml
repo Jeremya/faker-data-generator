@@ -1,9 +1,10 @@
 # nb -v run driver=cql yaml=cql-mouvements_valides tags=phase:schema host=dsehost
 scenarios:
   default:
-    - run driver=cql tags==phase:schema threads==1 cycles==UNDEF
-    - run driver=cql tags==phase:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
-    - run driver=cql tags==phase:read cycles===TEMPLATE(main-cycles,10000000) threads=auto
+    - run driver=cql tags==phase:schema threads==1 cycles==UNDEF host=10.101.33.38
+    - run driver=cql tags==name:rampup-date cycles=1000000 threads=10 host=10.101.33.38
+    - run driver=cql tags==name:rampup-ts cycles=1000000 threads=10 host=10.101.33.38
+    - run driver=cql tags==name:rampup-id cycles=1000000 threads=10 host=10.101.33.38
 bindings:
   key: Hash(); Mod(250000); AlphaNumericString(<<key_length:12>>);
   value: Hash(); HashedLineToString('data/mouvements.txt');
@@ -58,7 +59,7 @@ blocks:
           name: create-id-table
   - tags:
       phase: rampup
-      time: date
+      name: rampup-date
     params:
       cl: <<cl:LOCAL_QUORUM>>
     statements:
@@ -101,7 +102,7 @@ blocks:
   - tags:
       phase: main
       type: read
-      time: date
+      name: read-date
     params:
       ratio: 1
       cl: LOCAL_ONE
@@ -121,7 +122,7 @@ blocks:
   - tags:
       phase: main
       type: read
-      time: ts
+      name: read-ts
     params:
       ratio: 1
       cl: LOCAL_ONE
@@ -141,7 +142,7 @@ blocks:
   - tags:
       phase: main
       type: read
-      time: id
+      name: read-id
     params:
       ratio: 1
       cl: LOCAL_ONE
@@ -161,7 +162,7 @@ blocks:
   - tags:
       phase: main
       type: write
-      time: date
+      name: write-date
     params:
       cl: <<cl:LOCAL_QUORUM>>
     statements:
@@ -177,7 +178,7 @@ blocks:
   - tags:
       phase: main
       type: write
-      time: ts
+      name: write-ts
     params:
       cl: <<cl:LOCAL_QUORUM>>
     statements:
@@ -193,7 +194,7 @@ blocks:
   - tags:
       phase: main
       type: write
-      time: id
+      name: write-id
     params:
       cl: <<cl:LOCAL_QUORUM>>
     statements:
