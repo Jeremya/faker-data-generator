@@ -1,0 +1,384 @@
+# nb -v run driver=cql yaml=cql-mouvements_valides tags=phase:schema host=dsehost
+scenarios:
+  default:
+    - run driver=cql tags==phase:schema threads==1 cycles==UNDEF
+    - run driver=cql tags==phase:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
+    - run driver=cql tags==phase:read cycles===TEMPLATE(main-cycles,10000000) threads=auto
+bindings:
+  I_UNIQ_CPT: Hash(); Mod(25000); AlphaNumericString(<<key_length:12>>);
+  D_OPERT: StartingEpochMillis('2020-01-01 00:00:00'); AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  I_MVT: HashedLineToString('data/mouvements.txt');
+  C_ALI_RESTI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_ANNUL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_APPLI_ORIG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_AVIS_OPERT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_AVIS_OPE_ECRIT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_CD_SGE_SAIS: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_CLI_INT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_DEV_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_DEV_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_DEV_ORIG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_DONNEE_BLQNT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_EMTTR_PREL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_EXNRN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_FAM_ECO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_FF_DEV_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_G_GEST_1_MC: HashedLineToString('data/lorem_ipsum_token.txt')
+  C_G_GEST_2_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_MCC_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_MOTIF_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_MOTIF_REJET_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_MVT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_MVT_PREVL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_NTURE_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_NTURE_INTBQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_OPERT_INTBQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_OPE_RGLMTN_CHNG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_ORDO_MEME_CLT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_ORDO_RECU_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_RAPPRO: Hash(); ToInt() -> int;
+  C_REF_INTNE: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_REJET_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_SGE_SAIS_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_SRVCE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_SRVEC_ORIG_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_SURV_URGENT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_TYPE_I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_TYPE_Q_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_TYPE_SURV_URGENT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_TYPE_VAL_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  C_VAL_DONNEE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  D_ANNUL_MC:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_CTRCTL_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_OPERT_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_ORIG_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_RAPPRO: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_TRSRI_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_VALIDN_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  D_VAL_MC: StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_IBAN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_RIB_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_RIO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_VARIANT_CPT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_VARIANT_SU: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_VARIANT_TRF_1_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  I_VARIANT_TRF_2_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  L_EXTRT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  L_GLOB_PARM_2: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  L_I_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  L_PISTE_AUDIT_EIR: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  L_REF_CMRCLE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  L_REF_PRESTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  M_COMPTABILISE_MC: Hash();
+  N_APPLI_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_CHQ_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_CNTRT_OPSTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_CPT_CLE_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_DECIM_MC: Hash(); ToInt() -> int;
+  N_EMTTR_OPSTN_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_ETABL_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_FAM_TYPE_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_OPE_SDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_PIECE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_REF_ECRIT_2_MC: Hash(); ToInt() -> int;
+  N_REF_INTNE_DO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_REF_REM_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_SGE_BUR_ALLGE_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_SGE_EMTTR_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_SGE_EMTTR_TRFRT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_SGE_ORDO_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_SGE_RCPTRT_TRFRT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_SGE_TENEUR_CPT_MC: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  N_UNIQUE_MVT: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  Q_EXTRT_MC: Hash(); ToInt() -> int;
+  Q_MC: Hash();
+  Q_VAL_MC: Hash();
+  _D_EXP_MVT:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  _D_INT_MVT:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  _D_MOD_MVT:  StartingEpochMillis('2020-01-01 00:00:00');AddHashRange(0,36000000L); EpochMillisToCqlLocalDate();
+  _I_RIB_INV_SC_MC: Hash(); AlphaNumericString(<<key_length:12>>);
+  pfm_ancien_code_categorie: Hash(); ToInt() -> int;
+  pfm_code_pointage: Hash(); ToInt() -> int;
+  pfm_libelle_simplifie: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  pfm_nouveau_code_categorie: Hash(); ToInt() -> int;
+  pfm_nouveau_code_sous_categorie: Hash(); ToInt() -> int;
+  pfm_num_carte: HashedFileExtractToString('data/lorem_ipsum_full.txt',20,50)
+  pfm_tag_utilisateur: Hash(); ModuloToBoolean();
+blocks:
+  - tags:
+      phase: schema
+    params:
+      prepared: false
+    statements:
+      - create-keyspace: |
+          CREATE KEYSPACE IF NOT EXISTS <<keyspace:bench>>
+          WITH replication = {'class': 'NetworkTopologyStrategy', 'Solr':'<<rf:3>>'}
+          AND durable_writes = true;
+        tags:
+          name: create-keyspace
+      - create-table : |
+          CREATE TABLE IF NOT EXISTS <<keyspace:bench>>.<<table:mouvements_valides>> (
+              "I_UNIQ_CPT" text,
+              "D_OPERT" date,
+              "I_MVT" text,
+              "C_ALI_RESTI_MC" text,
+              "C_ANNUL_MC" text,
+              "C_APPLI_ORIG_MC" text,
+              "C_AVIS_OPERT_MC" text,
+              "C_AVIS_OPE_ECRIT_MC" text,
+              "C_CD_SGE_SAIS" text,
+              "C_CLI_INT" text,
+              "C_DEV_CPT_MC" text,
+              "C_DEV_MC" text,
+              "C_DEV_ORIG_MC" text,
+              "C_DONNEE_BLQNT_MC" text,
+              "C_EMTTR_PREL_MC" text,
+              "C_EXNRN_MC" text,
+              "C_FAM_ECO_MC" text,
+              "C_FF_DEV_MC" text,
+              "C_G_GEST_1_MC" text,
+              "C_G_GEST_2_MC" text,
+              "C_MCC_MC" text,
+              "C_MOTIF_MC" text,
+              "C_MOTIF_REJET_MC" text,
+              "C_MVT_MC" text,
+              "C_MVT_PREVL_MC" text,
+              "C_NTURE_CPT_MC" text,
+              "C_NTURE_INTBQ_MC" text,
+              "C_OPERT_INTBQ_MC" text,
+              "C_OPE_RGLMTN_CHNG_MC" text,
+              "C_ORDO_MEME_CLT" text,
+              "C_ORDO_RECU_MC" text,
+              "C_RAPPRO" int,
+              "C_REF_INTNE" text,
+              "C_REJET_MC" text,
+              "C_SGE_SAIS_MC" text,
+              "C_SRVCE_MC" text,
+              "C_SRVEC_ORIG_MC" text,
+              "C_SURV_URGENT_MC" text,
+              "C_TYPE_I_DO_MC" text,
+              "C_TYPE_Q_MC" text,
+              "C_TYPE_SURV_URGENT" text,
+              "C_TYPE_VAL_MC" text,
+              "C_VAL_DONNEE_MC" text,
+              "D_ANNUL_MC" date,
+              "D_CTRCTL_MC" date,
+              "D_OPERT_MC" date,
+              "D_ORIG_MC" date,
+              "D_RAPPRO" date,
+              "D_TRSRI_MC" date,
+              "D_VALIDN_MC" date,
+              "D_VAL_MC" date,
+              "I_DO_MC" text,
+              "I_IBAN_MC" text,
+              "I_RIB_MC" text,
+              "I_RIO_MC" text,
+              "I_VARIANT_CPT" text,
+              "I_VARIANT_SU" text,
+              "I_VARIANT_TRF_1_MC" text,
+              "I_VARIANT_TRF_2_MC" text,
+              "L_EXTRT_MC" text,
+              "L_GLOB_PARM_2" text,
+              "L_I_DO_MC" text,
+              "L_PISTE_AUDIT_EIR" text,
+              "L_REF_CMRCLE_MC" text,
+              "L_REF_PRESTN_MC" text,
+              "M_COMPTABILISE_MC" bigint,
+              "N_APPLI_MC" text,
+              "N_CHQ_MC" text,
+              "N_CNTRT_OPSTN_MC" text,
+              "N_CPT_CLE_ORDO_MC" text,
+              "N_DECIM_MC" int,
+              "N_EMTTR_OPSTN_MC" text,
+              "N_ETABL_ORDO_MC" text,
+              "N_FAM_TYPE_CPT_MC" text,
+              "N_OPE_SDO_MC" text,
+              "N_PIECE_MC" text,
+              "N_REF_ECRIT_2_MC" int,
+              "N_REF_INTNE_DO_MC" text,
+              "N_REF_REM_MC" text,
+              "N_SGE_BUR_ALLGE_MC" text,
+              "N_SGE_EMTTR_MC" text,
+              "N_SGE_EMTTR_TRFRT_MC" text,
+              "N_SGE_ORDO_MC" text,
+              "N_SGE_RCPTRT_TRFRT_MC" text,
+              "N_SGE_TENEUR_CPT_MC" text,
+              "N_UNIQUE_MVT" text,
+              "Q_EXTRT_MC" int,
+              "Q_MC" bigint,
+              "Q_VAL_MC" bigint,
+              "_D_EXP_MVT" date,
+              "_D_INT_MVT" date,
+              "_D_MOD_MVT" date,
+              "_I_RIB_INV_SC_MC" text,
+              pfm_ancien_code_categorie int,
+              pfm_code_pointage int,
+              pfm_libelle_simplifie text,
+              pfm_nouveau_code_categorie int,
+              pfm_nouveau_code_sous_categorie int,
+              pfm_num_carte text,
+              pfm_tag_utilisateur boolean,
+              PRIMARY KEY (("I_UNIQ_CPT", "D_OPERT", "I_MVT"))
+          ) WITH read_repair_chance = 0.0
+              AND dclocal_read_repair_chance = 0.1
+              AND gc_grace_seconds = 864000
+              AND bloom_filter_fp_chance = 0.01
+              AND caching = { 'keys' : 'ALL', 'rows_per_partition' : 'NONE' }
+              AND comment = ''
+              AND compaction = { 'class' : 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold' : 32, 'min_threshold' : 4 }
+              AND compression = { 'chunk_length_in_kb' : 64, 'class' : 'org.apache.cassandra.io.compress.LZ4Compressor' }
+              AND default_time_to_live = 0
+              AND speculative_retry = '99PERCENTILE'
+              AND min_index_interval = 128
+              AND max_index_interval = 2048
+              AND crc_check_chance = 1.0
+              AND cdc = false;
+        tags:
+          name: create-table
+      - truncate-table: |
+          TRUNCATE TABLE <<keyspace:bench>>.<<table:mouvements_valides>>;
+        tags:
+          name: truncate-table
+      - create-index: |
+          CREATE SEARCH INDEX IF NOT EXISTS ON <<keyspace:bench>>.<<table:mouvements_valides>>;
+        tags:
+          name: create-index
+  - tags:
+      phase: rampup
+    params:
+      cl: <<write_cl:LOCAL_QUORUM>>
+    statements:
+      - insert-rampup: |
+          INSERT INTO <<keyspace:bench>>.<<table:mouvements_valides>>
+          ("I_UNIQ_CPT", "D_OPERT", "I_MVT", "C_ALI_RESTI_MC", "C_ANNUL_MC", "C_APPLI_ORIG_MC", "C_AVIS_OPERT_MC",
+          "C_AVIS_OPE_ECRIT_MC", "C_CD_SGE_SAIS", "C_CLI_INT", "C_DEV_CPT_MC", "C_DEV_MC", "C_DEV_ORIG_MC",
+          "C_DONNEE_BLQNT_MC", "C_EMTTR_PREL_MC", "C_EXNRN_MC", "C_FAM_ECO_MC", "C_FF_DEV_MC", "C_G_GEST_1_MC",
+          "C_G_GEST_2_MC", "C_MCC_MC", "C_MOTIF_MC", "C_MOTIF_REJET_MC", "C_MVT_MC", "C_MVT_PREVL_MC",
+          "C_NTURE_CPT_MC", "C_NTURE_INTBQ_MC", "C_OPERT_INTBQ_MC", "C_OPE_RGLMTN_CHNG_MC", "C_ORDO_MEME_CLT",
+          "C_ORDO_RECU_MC", "C_RAPPRO", "C_REF_INTNE", "C_REJET_MC", "C_SGE_SAIS_MC", "C_SRVCE_MC", "C_SRVEC_ORIG_MC",
+          "C_SURV_URGENT_MC", "C_TYPE_I_DO_MC", "C_TYPE_Q_MC", "C_TYPE_SURV_URGENT", "C_TYPE_VAL_MC",
+          "C_VAL_DONNEE_MC", "D_ANNUL_MC", "D_CTRCTL_MC", "D_OPERT_MC", "D_ORIG_MC", "D_RAPPRO", "D_TRSRI_MC",
+          "D_VALIDN_MC", "D_VAL_MC", "I_DO_MC", "I_IBAN_MC", "I_RIB_MC", "I_RIO_MC", "I_VARIANT_CPT", "I_VARIANT_SU",
+          "I_VARIANT_TRF_1_MC", "I_VARIANT_TRF_2_MC", "L_EXTRT_MC", "L_GLOB_PARM_2", "L_I_DO_MC", "L_PISTE_AUDIT_EIR",
+          "L_REF_CMRCLE_MC", "L_REF_PRESTN_MC", "M_COMPTABILISE_MC", "N_APPLI_MC", "N_CHQ_MC", "N_CNTRT_OPSTN_MC",
+          "N_CPT_CLE_ORDO_MC", "N_DECIM_MC", "N_EMTTR_OPSTN_MC", "N_ETABL_ORDO_MC", "N_FAM_TYPE_CPT_MC",
+          "N_OPE_SDO_MC", "N_PIECE_MC", "N_REF_ECRIT_2_MC", "N_REF_INTNE_DO_MC", "N_REF_REM_MC", "N_SGE_BUR_ALLGE_MC",
+          "N_SGE_EMTTR_MC", "N_SGE_EMTTR_TRFRT_MC", "N_SGE_ORDO_MC", "N_SGE_RCPTRT_TRFRT_MC", "N_SGE_TENEUR_CPT_MC",
+          "N_UNIQUE_MVT", "Q_EXTRT_MC", "Q_MC", "Q_VAL_MC", "_D_EXP_MVT", "_D_INT_MVT", "_D_MOD_MVT",
+          "_I_RIB_INV_SC_MC", "pfm_ancien_code_categorie", "pfm_code_pointage", "pfm_libelle_simplifie",
+          "pfm_nouveau_code_categorie", "pfm_nouveau_code_sous_categorie", "pfm_num_carte", "pfm_tag_utilisateur")
+          VALUES
+          ({I_UNIQ_CPT}, {D_OPERT}, {I_MVT}, {C_ALI_RESTI_MC}, {C_ANNUL_MC}, {C_APPLI_ORIG_MC}, {C_AVIS_OPERT_MC},
+          {C_AVIS_OPE_ECRIT_MC}, {C_CD_SGE_SAIS}, {C_CLI_INT}, {C_DEV_CPT_MC}, {C_DEV_MC}, {C_DEV_ORIG_MC},
+          {C_DONNEE_BLQNT_MC}, {C_EMTTR_PREL_MC}, {C_EXNRN_MC}, {C_FAM_ECO_MC}, {C_FF_DEV_MC}, {C_G_GEST_1_MC},
+          {C_G_GEST_2_MC}, {C_MCC_MC}, {C_MOTIF_MC}, {C_MOTIF_REJET_MC}, {C_MVT_MC}, {C_MVT_PREVL_MC},
+          {C_NTURE_CPT_MC}, {C_NTURE_INTBQ_MC}, {C_OPERT_INTBQ_MC}, {C_OPE_RGLMTN_CHNG_MC}, {C_ORDO_MEME_CLT},
+          {C_ORDO_RECU_MC}, {C_RAPPRO}, {C_REF_INTNE}, {C_REJET_MC}, {C_SGE_SAIS_MC}, {C_SRVCE_MC}, {C_SRVEC_ORIG_MC},
+          {C_SURV_URGENT_MC}, {C_TYPE_I_DO_MC}, {C_TYPE_Q_MC}, {C_TYPE_SURV_URGENT}, {C_TYPE_VAL_MC},
+          {C_VAL_DONNEE_MC}, {D_ANNUL_MC}, {D_CTRCTL_MC}, {D_OPERT_MC}, {D_ORIG_MC}, {D_RAPPRO}, {D_TRSRI_MC},
+          {D_VALIDN_MC}, {D_VAL_MC}, {I_DO_MC}, {I_IBAN_MC}, {I_RIB_MC}, {I_RIO_MC}, {I_VARIANT_CPT}, {I_VARIANT_SU},
+          {I_VARIANT_TRF_1_MC}, {I_VARIANT_TRF_2_MC}, {L_EXTRT_MC}, {L_GLOB_PARM_2}, {L_I_DO_MC}, {L_PISTE_AUDIT_EIR},
+          {L_REF_CMRCLE_MC}, {L_REF_PRESTN_MC}, {M_COMPTABILISE_MC}, {N_APPLI_MC}, {N_CHQ_MC}, {N_CNTRT_OPSTN_MC},
+          {N_CPT_CLE_ORDO_MC}, {N_DECIM_MC}, {N_EMTTR_OPSTN_MC}, {N_ETABL_ORDO_MC}, {N_FAM_TYPE_CPT_MC},
+          {N_OPE_SDO_MC}, {N_PIECE_MC}, {N_REF_ECRIT_2_MC}, {N_REF_INTNE_DO_MC}, {N_REF_REM_MC}, {N_SGE_BUR_ALLGE_MC},
+          {N_SGE_EMTTR_MC}, {N_SGE_EMTTR_TRFRT_MC}, {N_SGE_ORDO_MC}, {N_SGE_RCPTRT_TRFRT_MC}, {N_SGE_TENEUR_CPT_MC},
+          {N_UNIQUE_MVT}, {Q_EXTRT_MC}, {Q_MC}, {Q_VAL_MC}, {_D_EXP_MVT}, {_D_INT_MVT}, {_D_MOD_MVT},
+          {_I_RIB_INV_SC_MC}, {pfm_ancien_code_categorie}, {pfm_code_pointage}, {pfm_libelle_simplifie},
+          {pfm_nouveau_code_categorie}, {pfm_nouveau_code_sous_categorie}, {pfm_num_carte}, {pfm_tag_utilisateur})
+        idempotent: true
+        tags:
+          name: insert-rampup
+  - tags:
+      phase: main
+      type: read
+    params:
+      ratio: 1
+      cl: LOCAL_ONE
+    statements:
+      - main-select-one: |
+          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:"2020-01-01T00:00:00Z" AND I_UNIQ_CPT:A*'
+        tags:
+          name: main-select-one
+      - main-select-two: |
+          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:"2020-01-08T00:00:00Z" AND C_G_GEST_1_MC:B*'
+        tags:
+          name: main-select-two
+      - main-select-three: |
+          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:"2020-01-03T00:00:00Z" AND I_UNIQ_CPT:Z*'
+        tags:
+          name: main-select-three
+      - main-select-four: |
+          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:"2020-01-07T00:00:00Z" AND C_G_GEST_1_MC:D*'
+        tags:
+          name: main-select-four
+      - main-select-five: |
+          SELECT * FROM <<keyspace:bench>>.<<table:mouvements_valides>>
+          WHERE solr_query='D_OPERT:"2020-01-03T00:00:00Z" AND I_UNIQ_CPT:B*'
+        tags:
+          name: main-select-five
+  - tags:
+      phase: main
+      type: write
+    params:
+      ratio: 1
+      cl: <<write_cl:LOCAL_QUORUM>>
+    statements:
+      - insert-main: |
+          INSERT INTO <<keyspace:bench>>.<<table:mouvements_valides>>
+          ("I_UNIQ_CPT", "D_OPERT", "I_MVT", "C_ALI_RESTI_MC", "C_ANNUL_MC", "C_APPLI_ORIG_MC", "C_AVIS_OPERT_MC",
+          "C_AVIS_OPE_ECRIT_MC", "C_CD_SGE_SAIS", "C_CLI_INT", "C_DEV_CPT_MC", "C_DEV_MC", "C_DEV_ORIG_MC",
+          "C_DONNEE_BLQNT_MC", "C_EMTTR_PREL_MC", "C_EXNRN_MC", "C_FAM_ECO_MC", "C_FF_DEV_MC", "C_G_GEST_1_MC",
+          "C_G_GEST_2_MC", "C_MCC_MC", "C_MOTIF_MC", "C_MOTIF_REJET_MC", "C_MVT_MC", "C_MVT_PREVL_MC",
+          "C_NTURE_CPT_MC", "C_NTURE_INTBQ_MC", "C_OPERT_INTBQ_MC", "C_OPE_RGLMTN_CHNG_MC", "C_ORDO_MEME_CLT",
+          "C_ORDO_RECU_MC", "C_RAPPRO", "C_REF_INTNE", "C_REJET_MC", "C_SGE_SAIS_MC", "C_SRVCE_MC", "C_SRVEC_ORIG_MC",
+          "C_SURV_URGENT_MC", "C_TYPE_I_DO_MC", "C_TYPE_Q_MC", "C_TYPE_SURV_URGENT", "C_TYPE_VAL_MC",
+          "C_VAL_DONNEE_MC", "D_ANNUL_MC", "D_CTRCTL_MC", "D_OPERT_MC", "D_ORIG_MC", "D_RAPPRO", "D_TRSRI_MC",
+          "D_VALIDN_MC", "D_VAL_MC", "I_DO_MC", "I_IBAN_MC", "I_RIB_MC", "I_RIO_MC", "I_VARIANT_CPT", "I_VARIANT_SU",
+          "I_VARIANT_TRF_1_MC", "I_VARIANT_TRF_2_MC", "L_EXTRT_MC", "L_GLOB_PARM_2", "L_I_DO_MC", "L_PISTE_AUDIT_EIR",
+          "L_REF_CMRCLE_MC", "L_REF_PRESTN_MC", "M_COMPTABILISE_MC", "N_APPLI_MC", "N_CHQ_MC", "N_CNTRT_OPSTN_MC",
+          "N_CPT_CLE_ORDO_MC", "N_DECIM_MC", "N_EMTTR_OPSTN_MC", "N_ETABL_ORDO_MC", "N_FAM_TYPE_CPT_MC",
+          "N_OPE_SDO_MC", "N_PIECE_MC", "N_REF_ECRIT_2_MC", "N_REF_INTNE_DO_MC", "N_REF_REM_MC", "N_SGE_BUR_ALLGE_MC",
+          "N_SGE_EMTTR_MC", "N_SGE_EMTTR_TRFRT_MC", "N_SGE_ORDO_MC", "N_SGE_RCPTRT_TRFRT_MC", "N_SGE_TENEUR_CPT_MC",
+          "N_UNIQUE_MVT", "Q_EXTRT_MC", "Q_MC", "Q_VAL_MC", "_D_EXP_MVT", "_D_INT_MVT", "_D_MOD_MVT",
+          "_I_RIB_INV_SC_MC", "pfm_ancien_code_categorie", "pfm_code_pointage", "pfm_libelle_simplifie",
+          "pfm_nouveau_code_categorie", "pfm_nouveau_code_sous_categorie", "pfm_num_carte", "pfm_tag_utilisateur")
+          VALUES
+          ({I_UNIQ_CPT}, {D_OPERT}, {I_MVT}, {C_ALI_RESTI_MC}, {C_ANNUL_MC}, {C_APPLI_ORIG_MC}, {C_AVIS_OPERT_MC},
+          {C_AVIS_OPE_ECRIT_MC}, {C_CD_SGE_SAIS}, {C_CLI_INT}, {C_DEV_CPT_MC}, {C_DEV_MC}, {C_DEV_ORIG_MC},
+          {C_DONNEE_BLQNT_MC}, {C_EMTTR_PREL_MC}, {C_EXNRN_MC}, {C_FAM_ECO_MC}, {C_FF_DEV_MC}, {C_G_GEST_1_MC},
+          {C_G_GEST_2_MC}, {C_MCC_MC}, {C_MOTIF_MC}, {C_MOTIF_REJET_MC}, {C_MVT_MC}, {C_MVT_PREVL_MC},
+          {C_NTURE_CPT_MC}, {C_NTURE_INTBQ_MC}, {C_OPERT_INTBQ_MC}, {C_OPE_RGLMTN_CHNG_MC}, {C_ORDO_MEME_CLT},
+          {C_ORDO_RECU_MC}, {C_RAPPRO}, {C_REF_INTNE}, {C_REJET_MC}, {C_SGE_SAIS_MC}, {C_SRVCE_MC}, {C_SRVEC_ORIG_MC},
+          {C_SURV_URGENT_MC}, {C_TYPE_I_DO_MC}, {C_TYPE_Q_MC}, {C_TYPE_SURV_URGENT}, {C_TYPE_VAL_MC},
+          {C_VAL_DONNEE_MC}, {D_ANNUL_MC}, {D_CTRCTL_MC}, {D_OPERT_MC}, {D_ORIG_MC}, {D_RAPPRO}, {D_TRSRI_MC},
+          {D_VALIDN_MC}, {D_VAL_MC}, {I_DO_MC}, {I_IBAN_MC}, {I_RIB_MC}, {I_RIO_MC}, {I_VARIANT_CPT}, {I_VARIANT_SU},
+          {I_VARIANT_TRF_1_MC}, {I_VARIANT_TRF_2_MC}, {L_EXTRT_MC}, {L_GLOB_PARM_2}, {L_I_DO_MC}, {L_PISTE_AUDIT_EIR},
+          {L_REF_CMRCLE_MC}, {L_REF_PRESTN_MC}, {M_COMPTABILISE_MC}, {N_APPLI_MC}, {N_CHQ_MC}, {N_CNTRT_OPSTN_MC},
+          {N_CPT_CLE_ORDO_MC}, {N_DECIM_MC}, {N_EMTTR_OPSTN_MC}, {N_ETABL_ORDO_MC}, {N_FAM_TYPE_CPT_MC},
+          {N_OPE_SDO_MC}, {N_PIECE_MC}, {N_REF_ECRIT_2_MC}, {N_REF_INTNE_DO_MC}, {N_REF_REM_MC}, {N_SGE_BUR_ALLGE_MC},
+          {N_SGE_EMTTR_MC}, {N_SGE_EMTTR_TRFRT_MC}, {N_SGE_ORDO_MC}, {N_SGE_RCPTRT_TRFRT_MC}, {N_SGE_TENEUR_CPT_MC},
+          {N_UNIQUE_MVT}, {Q_EXTRT_MC}, {Q_MC}, {Q_VAL_MC}, {_D_EXP_MVT}, {_D_INT_MVT}, {_D_MOD_MVT},
+          {_I_RIB_INV_SC_MC}, {pfm_ancien_code_categorie}, {pfm_code_pointage}, {pfm_libelle_simplifie},
+          {pfm_nouveau_code_categorie}, {pfm_nouveau_code_sous_categorie}, {pfm_num_carte}, {pfm_tag_utilisateur})
+          USING TTL <<ttl_insert:1800>>;
+        idempotent: true
+        tags:
+          name: insert-main
+  # - tags:
+  #     phase: main
+  #     type: delete
+  #   params:
+  #     ratio: <<delete_ratio:1>>
+  #     cl: <<delete_cl:LOCAL_QUORUM>>
+  #   statements:
+  #     - delete-main: |
+  #         DELETE FROM  <<keyspace:bench>>.<<table:mouvements_valides>>
+  #         WHERE "I_UNIQ_CPT"={I_UNIQ_CPT} AND "D_OPERT"={D_OPERT} AND "I_MVT"={I_MVT}
+  #       idempotent: true
+  #       tags:
+  #         name: delete-main
