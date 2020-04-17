@@ -6,10 +6,14 @@ scenarios:
     - run driver=cql tags==phase:read cycles===TEMPLATE(main-cycles,10000000) threads=auto
 bindings:
   key: Hash(); Mod(250000); AlphaNumericString(<<key_length:12>>);
-  text: Hash(); HashedLineToString('data/mouvements.txt');
-  date: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
-  date_as_ts:
-  date_as_date:
+  value: Hash(); HashedLineToString('data/mouvements.txt');
+  time: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  time_date:
+  time_ts:
+  time_id:
+  search_1:
+  search_2:
+  search_3:
 blocks:
   - tags:
       phase: schema
@@ -22,97 +26,95 @@ blocks:
           AND durable_writes = true;
         tags:
           name: create-keyspace
-      - create-table : |
-          CREATE TABLE IF NOT EXISTS <<keyspace:bench>>.<<table:merge_test>>_tiered (
+      - create-date-table : |
+          CREATE TABLE IF NOT EXISTS <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>> (
             key int,
             value text,
             time_date date,
             PRIMARY KEY (key)
           );
         tags:
-          name: create-table
-      - truncate-table: |
-          TRUNCATE TABLE <<keyspace:bench>>.<<table:mouvements_valides>>;
+          name: create-date-table
+      - create-ts-table : |
+          CREATE TABLE IF NOT EXISTS <<keyspace:bench>>.<<table:merge_test>>_ts_<<policy:tiered>> (
+            key int,
+            value text,
+            time_ts timestamp,
+            PRIMARY KEY (key)
+          );
         tags:
-          name: truncate-table
-      - create-index: |
-          CREATE SEARCH INDEX IF NOT EXISTS ON <<keyspace:bench>>.<<table:mouvements_valides>>;
+          name: create-ts-table
+      - create-id-table : |
+          CREATE TABLE IF NOT EXISTS <<keyspace:bench>>.<<table:merge_test>>_id_<<policy:tiered>> (
+            key int,
+            value text,
+            time_id timeuuid,
+            PRIMARY KEY (key)
+          );
         tags:
-          name: create-index
+          name: create-id-table
   - tags:
       phase: rampup
+      time: date
     params:
       cl: <<write_cl:LOCAL_QUORUM>>
     statements:
-      - insert-rampup: |
-          INSERT INTO <<keyspace:bench>>.<<table:mouvements_valides>>
-          ("I_UNIQ_CPT", "D_OPERT", "I_MVT", "C_ALI_RESTI_MC", "C_ANNUL_MC", "C_APPLI_ORIG_MC", "C_AVIS_OPERT_MC",
-          "C_AVIS_OPE_ECRIT_MC", "C_CD_SGE_SAIS", "C_CLI_INT", "C_DEV_CPT_MC", "C_DEV_MC", "C_DEV_ORIG_MC",
-          "C_DONNEE_BLQNT_MC", "C_EMTTR_PREL_MC", "C_EXNRN_MC", "C_FAM_ECO_MC", "C_FF_DEV_MC", "C_G_GEST_1_MC",
-          "C_G_GEST_2_MC", "C_MCC_MC", "C_MOTIF_MC", "C_MOTIF_REJET_MC", "C_MVT_MC", "C_MVT_PREVL_MC",
-          "C_NTURE_CPT_MC", "C_NTURE_INTBQ_MC", "C_OPERT_INTBQ_MC", "C_OPE_RGLMTN_CHNG_MC", "C_ORDO_MEME_CLT",
-          "C_ORDO_RECU_MC", "C_RAPPRO", "C_REF_INTNE", "C_REJET_MC", "C_SGE_SAIS_MC", "C_SRVCE_MC", "C_SRVEC_ORIG_MC",
-          "C_SURV_URGENT_MC", "C_TYPE_I_DO_MC", "C_TYPE_Q_MC", "C_TYPE_SURV_URGENT", "C_TYPE_VAL_MC",
-          "C_VAL_DONNEE_MC", "D_ANNUL_MC", "D_CTRCTL_MC", "D_OPERT_MC", "D_ORIG_MC", "D_RAPPRO", "D_TRSRI_MC",
-          "D_VALIDN_MC", "D_VAL_MC", "I_DO_MC", "I_IBAN_MC", "I_RIB_MC", "I_RIO_MC", "I_VARIANT_CPT", "I_VARIANT_SU",
-          "I_VARIANT_TRF_1_MC", "I_VARIANT_TRF_2_MC", "L_EXTRT_MC", "L_GLOB_PARM_2", "L_I_DO_MC", "L_PISTE_AUDIT_EIR",
-          "L_REF_CMRCLE_MC", "L_REF_PRESTN_MC", "M_COMPTABILISE_MC", "N_APPLI_MC", "N_CHQ_MC", "N_CNTRT_OPSTN_MC",
-          "N_CPT_CLE_ORDO_MC", "N_DECIM_MC", "N_EMTTR_OPSTN_MC", "N_ETABL_ORDO_MC", "N_FAM_TYPE_CPT_MC",
-          "N_OPE_SDO_MC", "N_PIECE_MC", "N_REF_ECRIT_2_MC", "N_REF_INTNE_DO_MC", "N_REF_REM_MC", "N_SGE_BUR_ALLGE_MC",
-          "N_SGE_EMTTR_MC", "N_SGE_EMTTR_TRFRT_MC", "N_SGE_ORDO_MC", "N_SGE_RCPTRT_TRFRT_MC", "N_SGE_TENEUR_CPT_MC",
-          "N_UNIQUE_MVT", "Q_EXTRT_MC", "Q_MC", "Q_VAL_MC", "_D_EXP_MVT", "_D_INT_MVT", "_D_MOD_MVT",
-          "_I_RIB_INV_SC_MC", "pfm_ancien_code_categorie", "pfm_code_pointage", "pfm_libelle_simplifie",
-          "pfm_nouveau_code_categorie", "pfm_nouveau_code_sous_categorie", "pfm_num_carte", "pfm_tag_utilisateur")
+      - insert-date: |
+          INSERT INTO <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
+          (key, value, time_date)
           VALUES
-          ({I_UNIQ_CPT}, {D_OPERT}, {I_MVT}, {C_ALI_RESTI_MC}, {C_ANNUL_MC}, {C_APPLI_ORIG_MC}, {C_AVIS_OPERT_MC},
-          {C_AVIS_OPE_ECRIT_MC}, {C_CD_SGE_SAIS}, {C_CLI_INT}, {C_DEV_CPT_MC}, {C_DEV_MC}, {C_DEV_ORIG_MC},
-          {C_DONNEE_BLQNT_MC}, {C_EMTTR_PREL_MC}, {C_EXNRN_MC}, {C_FAM_ECO_MC}, {C_FF_DEV_MC}, {C_G_GEST_1_MC},
-          {C_G_GEST_2_MC}, {C_MCC_MC}, {C_MOTIF_MC}, {C_MOTIF_REJET_MC}, {C_MVT_MC}, {C_MVT_PREVL_MC},
-          {C_NTURE_CPT_MC}, {C_NTURE_INTBQ_MC}, {C_OPERT_INTBQ_MC}, {C_OPE_RGLMTN_CHNG_MC}, {C_ORDO_MEME_CLT},
-          {C_ORDO_RECU_MC}, {C_RAPPRO}, {C_REF_INTNE}, {C_REJET_MC}, {C_SGE_SAIS_MC}, {C_SRVCE_MC}, {C_SRVEC_ORIG_MC},
-          {C_SURV_URGENT_MC}, {C_TYPE_I_DO_MC}, {C_TYPE_Q_MC}, {C_TYPE_SURV_URGENT}, {C_TYPE_VAL_MC},
-          {C_VAL_DONNEE_MC}, {D_ANNUL_MC}, {D_CTRCTL_MC}, {D_OPERT_MC}, {D_ORIG_MC}, {D_RAPPRO}, {D_TRSRI_MC},
-          {D_VALIDN_MC}, {D_VAL_MC}, {I_DO_MC}, {I_IBAN_MC}, {I_RIB_MC}, {I_RIO_MC}, {I_VARIANT_CPT}, {I_VARIANT_SU},
-          {I_VARIANT_TRF_1_MC}, {I_VARIANT_TRF_2_MC}, {L_EXTRT_MC}, {L_GLOB_PARM_2}, {L_I_DO_MC}, {L_PISTE_AUDIT_EIR},
-          {L_REF_CMRCLE_MC}, {L_REF_PRESTN_MC}, {M_COMPTABILISE_MC}, {N_APPLI_MC}, {N_CHQ_MC}, {N_CNTRT_OPSTN_MC},
-          {N_CPT_CLE_ORDO_MC}, {N_DECIM_MC}, {N_EMTTR_OPSTN_MC}, {N_ETABL_ORDO_MC}, {N_FAM_TYPE_CPT_MC},
-          {N_OPE_SDO_MC}, {N_PIECE_MC}, {N_REF_ECRIT_2_MC}, {N_REF_INTNE_DO_MC}, {N_REF_REM_MC}, {N_SGE_BUR_ALLGE_MC},
-          {N_SGE_EMTTR_MC}, {N_SGE_EMTTR_TRFRT_MC}, {N_SGE_ORDO_MC}, {N_SGE_RCPTRT_TRFRT_MC}, {N_SGE_TENEUR_CPT_MC},
-          {N_UNIQUE_MVT}, {Q_EXTRT_MC}, {Q_MC}, {Q_VAL_MC}, {_D_EXP_MVT}, {_D_INT_MVT}, {_D_MOD_MVT},
-          {_I_RIB_INV_SC_MC}, {pfm_ancien_code_categorie}, {pfm_code_pointage}, {pfm_libelle_simplifie},
-          {pfm_nouveau_code_categorie}, {pfm_nouveau_code_sous_categorie}, {pfm_num_carte}, {pfm_tag_utilisateur})
+          ({key}, {value}, {time_date})
         idempotent: true
         tags:
-          name: insert-rampup
+          name: insert-date
+  - tags:
+      phase: rampup
+      time: ts
+    params:
+      cl: <<write_cl:LOCAL_QUORUM>>
+    statements:
+      - insert-ts: |
+          INSERT INTO <<keyspace:bench>>.<<table:merge_test>>_ts_<<policy:tiered>>
+          (key, value, time_ts)
+          VALUES
+          ({key}, {value}, {time_ts})
+        idempotent: true
+        tags:
+          name: insert-ts
+  - tags:
+      phase: rampup
+      time: id
+    params:
+      cl: <<write_cl:LOCAL_QUORUM>>
+    statements:
+      - insert-id: |
+          INSERT INTO <<keyspace:bench>>.<<table:merge_test>>_id_<<policy:tiered>>
+          (key, value, time_id)
+          VALUES
+          ({key}, {value}, {time_id})
+        idempotent: true
+        tags:
+          name: insert-id
   - tags:
       phase: main
       type: read
+      time: date
     params:
       ratio: 1
       cl: LOCAL_ONE
       prepared: false
       raw: true
     statements:
-      - main-select-one: |
-          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:{D_OPERT} AND I_UNIQ_CPT:{I_UNIQ_CPT}';
+      - search-one-date: |
+          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
+          WHERE solr_query='{search_1}';
         tags:
-          name: main-select-one
-      - main-select-two: |
-          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:{D_OPERT} AND C_G_GEST_1_MC:{TOKEN}';
+          name: search-one-date
+      - search-two-date: |
+          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
+          WHERE solr_query='{search_2}';
         tags:
-          name: main-select-two
-      - main-select-three: |
-          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_VALIDN_MC:{D_VALIDN_MC} AND _I_RIB_INV_SC_MC:{TOKEN}';
-        tags:
-          name: main-select-three
-      - main-select-four: |
-          SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:mouvements_valides>>
-          WHERE solr_query='D_OPERT:{D_OPERT} AND D_VALIDN_MC:{D_VALIDN_MC} AND C_G_GEST_1_MC:{TOKEN}';
-        tags:
-          name: main-select-four
+          name: search-two-date
   - tags:
       phase: main
       type: write
