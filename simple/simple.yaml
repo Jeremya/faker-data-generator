@@ -9,17 +9,17 @@ scenarios:
     - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.33.38 policy=sorting
     - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.33.38 policy=auto_expunge
 bindings:
-  key: Hash(); Mod(1000000); AlphaNumericString(<<key_length:16>>);
+  key: Hash(); Mod(1000000);
   value: FullNames();
   time: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); Save('time');
   time_date: Load('time') ; EpochMillisToCqlLocalDate();
-  time_ts: Load('time') ;
-  time_string: Load('time'); StringDateWrapper("YYYY-MM-dd'T'HH:mm:ss.SSS'Z'"); SaveString('time_string');
-  search_token: Template('value:{}', Firstname())
+  time_ts: Load('time') ; ToString(); SaveString('ts');
+  time_string: Load('time') ; StringDateWrapper("YYYY-MM-dd'T'HH:mm:ss.SSS'Z'") ; SaveString('time_string');
+  search_token: Template('value:{}', FirstNames())
   search_date: Template('time:{}', LoadString('time_string'));
   search_date_range: Template('value:{} AND time:[{} TO NOW]', Combinations('A-Z;a-z;a-z;*'), LoadString('time_string'));
-  search_ts: Template('time:[{} TO *]', Load('time'));
-  search_ts_range: Template('value:{} AND time:[{} TO *]', Combinations('A-Z;a-z;a-z;*'), Load('time'));
+  search_ts: Template('time:[{} TO *]', LoadString('ts'));
+  search_ts_range: Template('value:{} AND time:[{} TO *]', Combinations('A-Z;a-z;a-z;*'), LoadString('ts'));
 blocks:
   - tags:
       phase: schema
