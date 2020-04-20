@@ -11,15 +11,12 @@ scenarios:
 bindings:
   key: Hash(); Mod(1000000);
   value: FullNames();
-  time: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); Save('time');
-  time_date: Load('time') ; EpochMillisToCqlLocalDate();
-  time_ts: Load('time') ; ToString(); SaveString('ts');
-  time_string: Load('time') ; EpochMillisToCqlLocalDate(); ToString();
-  search_token: Template('value:{}', FirstNames())
-  search_date: Template('time:{}', LoadString('time_string'));
-  search_date_range: Template('value:{} AND time:[{} TO NOW]', Combinations('A-Z;a-z;a-z;*'), LoadString('time_string'));
-  search_ts: Template('time:[{} TO *]', LoadString('ts'));
-  search_ts_range: Template('value:{} AND time:[{} TO *]', Combinations('A-Z;a-z;a-z;*'), LoadString('ts'));
+  time_ts: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L);
+  time_date: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); EpochMillisToCqlLocalDate();
+  partial: Combinations('A-Z;a-z;a-z;*');
+  search_token: FirstNames() ; Format('value:%s');
+  search_date: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); StringDateWrapper("YYYY-MM-dd"); Format('time:%s');
+  search_ts: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); Format('time:%s');
 blocks:
   - tags:
       phase: schema
@@ -85,22 +82,23 @@ blocks:
     params:
       ratio: 1
       cl: LOCAL_ONE
-      prepared: false
-      raw: true
+      prepared: true
+      parametrized: true
     statements:
       - search-date-token: |
           SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
           WHERE solr_query='{search_token}';
         tags:
           name: search-date-token
-      - search-date-one: |
+      - search-date-date: |
           SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
           WHERE solr_query='{search_date}';
         tags:
           name: search-date-date
-      - search-date-two: |
+
+      - search-date-date-range: |
           SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
-          WHERE solr_query='{search_date_range}';
+          WHERE solr_query='value:{partial} AND time:[{time_date} TO NOW]';
         tags:
           name: search-date-date-range
   - tags:
@@ -110,22 +108,22 @@ blocks:
     params:
       ratio: 1
       cl: LOCAL_ONE
-      prepared: false
-      raw: true
+      prepared: true
+      parametrized: true
     statements:
-      - search-date-token: |
+      - search-ts-token: |
           SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_ts_<<policy:tiered>>
           WHERE solr_query='{search_token}';
         tags:
           name: search-date-token
-      - search-date-date: |
+      - search-ts-date: |
           SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_ts_<<policy:tiered>>
-          WHERE solr_query='{search_date}';
+          WHERE solr_query='{search_ts}';
         tags:
           name: search-date-date
-      - search-date-date-range: |
+      - search-ts-date-range: |
           SELECT COUNT(*) FROM <<keyspace:bench>>.<<table:merge_test>>_ts_<<policy:tiered>>
-          WHERE solr_query='{search_date_range}';
+          WHERE solr_query='value:{partial} AND time:[{time_ts} TO *]';
         tags:
           name: search-ts-date-range
   - tags:
