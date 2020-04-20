@@ -14,7 +14,7 @@ bindings:
   time: StartingEpochMillis('2019-01-01 00:00:00'); AddHashRange(0,360000000L); Save('time');
   time_date: Load('time') ; EpochMillisToCqlLocalDate();
   time_ts: Load('time') ; ToString(); SaveString('ts');
-  time_string: Load('time') ; StringDateWrapper("YYYY-MM-dd'T'HH:mm:ss.SSS'Z'") ; SaveString('time_string');
+  time_string: Load('time') ; EpochMillisToCqlLocalDate(); ToString();
   search_token: Template('value:{}', FirstNames())
   search_date: Template('time:{}', LoadString('time_string'));
   search_date_range: Template('value:{} AND time:[{} TO NOW]', Combinations('A-Z;a-z;a-z;*'), LoadString('time_string'));
