@@ -138,7 +138,7 @@ blocks:
           (key, value, time)
           VALUES
           ({key}, {value}, {time_date})
-          USING TTL=<<ttl:36000>>;
+          USING TTL <<ttl:36000>>;
         idempotent: true
         tags:
           name: insert-date
@@ -154,7 +154,7 @@ blocks:
           (key, value, time)
           VALUES
           ({key}, {value}, {time_ts})
-          USING TTL=<<ttl:36000>>;
+          USING TTL <<ttl:36000>>;
         idempotent: true
         tags:
           name: insert-ts
