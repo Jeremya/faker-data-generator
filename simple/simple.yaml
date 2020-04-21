@@ -1,13 +1,13 @@
 # nb -v run driver=cql yaml=cql-mouvements_valides tags=phase:schema host=dsehost
 scenarios:
   default:
-    - run driver=cql tags==phase:schema threads==1 cycles==UNDEF host=10.101.33.38
-    - run driver=cql tags==name:rampup-date cycles=20000000 threads=10 host=10.101.33.38 policy=tiered
-    - run driver=cql tags==name:rampup-date cycles=20000000 threads=10 host=10.101.33.38 policy=sorting
-    - run driver=cql tags==name:rampup-date cycles=20000000 threads=10 host=10.101.33.38 policy=auto_expunge
-    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.33.38 policy=tiered
-    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.33.38 policy=sorting
-    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.33.38 policy=auto_expunge
+    - run driver=cql tags==phase:schema threads==1 cycles==UNDEF host=10.101.34.252
+    - run driver=cql tags==name:rampup-date cycles=20000000 threads=10 host=10.101.34.252 policy=tiered
+    - run driver=cql tags==name:rampup-date cycles=20000000 threads=10 host=10.101.34.252 policy=sorting
+    - run driver=cql tags==name:rampup-date cycles=20000000 threads=10 host=10.101.34.252 policy=auto_expunge
+    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.34.252 policy=tiered
+    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.34.252 policy=sorting
+    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.34.252 policy=auto_expunge
 bindings:
   key: Hash(); Mod(1000000);
   value: FullNames();
