@@ -2,7 +2,7 @@
 
 myPath=/mnt/cass_data_disks/data1/data/solr.data
 
-data=`find $myPath -maxdepth 1 -type d`;
+data=`find $myPath -maxdepth 1 -type d | sort`;
 
 for dir in $data; do
   printf "`basename $dir`,"
