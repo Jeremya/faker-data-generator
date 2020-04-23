@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Cut the CSV made by watch_solr_segments into unique TS
+# from current dir
 
 for f in `\ls *.csv`; do
   headerline=`cat $f | head -1`
