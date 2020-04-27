@@ -4,7 +4,7 @@ scenarios:
     - run driver=cql tags==phase:schema threads==1 cycles==UNDEF host=10.101.34.252
     - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.34.252 policy=auto_expunge
 bindings:
-  key: Identity(); ToInt() -> int;
+  key: Identity(); Add(<<start:0>>); ToInt() -> int;
   value: FullNames();
   time_date: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,36000000000L); EpochMillisToCqlLocalDate();
 blocks:
@@ -54,7 +54,18 @@ blocks:
           (key, value, time)
           VALUES
           ({key}, {value}, {time_date})
-          USING TTL <<ttl:300>>;
+          USING TTL <<ttl:1000>>;
+        idempotent: true
+        tags:
+          name: insert-ts
+  - tags:
+      phase: main
+    params:
+      cl: <<cl:LOCAL_QUORUM>>
+    statements:
+      - insert-ts: |
+          DELETE FROM <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
+          WHERE key={key};
         idempotent: true
         tags:
           name: insert-ts
