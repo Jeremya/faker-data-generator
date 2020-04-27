@@ -1,0 +1,60 @@
+# nb -v run driver=cql yaml=cql-mouvements_valides tags=phase:schema host=dsehost
+scenarios:
+  default:
+    - run driver=cql tags==phase:schema threads==1 cycles==UNDEF host=10.101.34.252
+    - run driver=cql tags==name:rampup-ts cycles=20000000 threads=10 host=10.101.34.252 policy=auto_expunge
+bindings:
+  key: Identity(); ToInt() -> int;
+  value: FullNames();
+  time_date: StartingEpochMillis('2010-01-01 00:00:00'); AddHashRange(0,36000000000L); EpochMillisToCqlLocalDate();
+blocks:
+  - tags:
+      phase: schema
+    params:
+      prepared: false
+    statements:
+      - create-keyspace: |
+          CREATE KEYSPACE IF NOT EXISTS <<keyspace:bench>>
+          WITH replication = {'class': 'NetworkTopologyStrategy', 'Solr':'<<rf:1>>'}
+          AND durable_writes = true;
+        tags:
+          name: create-keyspace
+      - create-date-table : |
+          CREATE TABLE IF NOT EXISTS <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>> (
+            key int,
+            value text,
+            time date,
+            PRIMARY KEY (key)
+          );
+        tags:
+          name: create-date-table
+  - tags:
+      phase: rampup
+    params:
+      ratio: 3
+      cl: <<cl:LOCAL_QUORUM>>
+    statements:
+      - insert-date: |
+          INSERT INTO <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
+          (key, value, time)
+          VALUES
+          ({key}, {value}, {time_date})
+          USING TTL 0;
+        idempotent: true
+        tags:
+          name: insert-date
+  - tags:
+      phase: rampup
+    params:
+      ratio: 2
+      cl: <<cl:LOCAL_QUORUM>>
+    statements:
+      - insert-ts: |
+          INSERT INTO <<keyspace:bench>>.<<table:merge_test>>_date_<<policy:tiered>>
+          (key, value, time)
+          VALUES
+          ({key}, {value}, {time_date})
+          USING TTL <<ttl:300>>;
+        idempotent: true
+        tags:
+          name: insert-ts
