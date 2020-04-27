@@ -1,9 +1,16 @@
 # faker-data-generator
 
-### bank-operations 
-This file will generate a CSV fake bank transaction with this header:
-```
-iban;account_code;operation_id;label;date_operation;date_validation;date_correction;amount;original_operation_id
+## Import csv into influxdb
+
+```bash
+pip install influxdb
+git clone git@github.com:Pierrotws/csv-to-influxdb
+python csv-to-influxdb/csv-to-influxdb.py --dbname ... --input ... --metricname .. --timeformat ...
 ```
 
-It can be run with `node operation_generator.js`.
+## Import TS of cut_csv of watch_solr_segments
+
+
+```bash
+for f in `\ls *.csv`; do python ~/csv-to-influxdb/csv-to-influxdb.py --dbname csvdb --input $f --metricname $f --timeformat '%Y-%m-%dT%H:%M:%S+00:00'; done
+```
