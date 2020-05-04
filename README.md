@@ -2,11 +2,14 @@
 
 This repo gathers examples to run performance test on different usecases using [NoSQLBench](https://github.com/nosqlbench/nosqlbench).
 
-## Use cases
+## Repository description
 
-### Bank_operations
+| Foler   	| Goal      	|
+|----------	|-------------	|
+| [bank-operations](bank-operations) 	| classic bank transaction model in `iban.yaml`. Originally created to test Solr merge policies.  	|
+| [simple](simple) 	| basic table definitions using key/value and timestamp or dates. Originally created to test Solr merge policies.  	|
+| [ttl](ttl)	| basic example to use ttl and see their impacts. Originally created to test Solr merge policies.	|
 
-In this folder we have a classic bank transaction model in `iban.yaml`.
 
 
 ## Metrics
